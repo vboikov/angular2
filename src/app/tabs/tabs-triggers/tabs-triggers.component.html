@@ -1,4 +1,4 @@
 <div class="trigger" *ngFor="let song of data; let i=index"
-     (click)="onClickChangeState(i)" [ngClass]="{'active' : activeIndex === i}">
+     [routerLink]="song.id" routerLinkActive="active">
   <h2>{{song.title}}</h2>
 </div>

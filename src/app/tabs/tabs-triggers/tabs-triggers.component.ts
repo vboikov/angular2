@@ -1,6 +1,6 @@
-import { Component, OnInit, Input,  Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input,  Output, EventEmitter } from '@angular/core';
 import { Song } from '../../data/song';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, RouterLinkActive  } from '@angular/router';
 
 @Component({
   selector: 'app-tabs-triggers',
@@ -10,17 +10,16 @@ import { Router } from '@angular/router';
 export class TabsTriggersComponent {
   @Input() data: Song[];
   @Output() idx: EventEmitter<number> = new EventEmitter<number>();
-  public activeIndex;
+
+  public activeIndex: number;
+  public check;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
   onClickIdx(i) {
     this.idx.emit(i);
-  }
-
-  onClickChangeState(idx) {
-    this.router.navigate(['songs/' + this.data[idx].id]);
-    this.activeIndex = idx;
   }
 
 
