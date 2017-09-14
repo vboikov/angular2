@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+  margin:0;
+  padding:0;
+  line-height: 1;
+  box-sizing: border-box;
+}
+html{
+  padding: 20px;
+}
+app-tabs-triggers,
+app-tabs-content{
+  display: block;
+  float: left;
+  width: 100%;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+nav ul li{
+  list-style: none;
+  display: inline-block;
+}

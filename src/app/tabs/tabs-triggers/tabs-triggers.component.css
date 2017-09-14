@@ -1,0 +1,23 @@
+.trigger{
+  width: auto;
+  max-width: 100%;
+  min-width: 25%;
+  text-align: center;
+  border:1px solid #000;
+  display: block;
+  float: left;
+  cursor: pointer;
+}
+
+.trigger h2{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.active{
+  background: darkblue;
+}
+.active h2{
+  color: #fff;
+}
