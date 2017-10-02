@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,  Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Song } from '../data/song';
 import { SongService } from '../data/song.service';
 
@@ -14,10 +14,11 @@ export class TabsComponent implements OnInit {
   @Output() idx: EventEmitter<number> = new EventEmitter<number>();
 
 
+
+
   song: Song;
   songs: Song[];
 
-  title = 'app works!';
   constructor(
     private songService: SongService) {
     this.songs = [];
@@ -26,7 +27,6 @@ export class TabsComponent implements OnInit {
     this.songService.getSongs().subscribe(songs => {
       this.songs = songs;
     });
-
   }
 
 }

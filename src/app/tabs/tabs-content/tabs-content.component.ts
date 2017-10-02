@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy , Input } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SongService } from '../../data/song.service';
+import { SongResolver } from '../../data/song.resolver';
 
 
 import { Song } from '../../data/song';
@@ -13,33 +14,26 @@ import { Song } from '../../data/song';
 })
 export class TabsContentComponent implements OnInit, OnDestroy  {
   @Input() data: Song;
-
   private song: {};
   private id: number;
-  private sub;
   private res;
 
   constructor(
     private route: ActivatedRoute,
-    private songService: SongService
+    private songService: SongService,
+    private songResolver: SongResolver
 ) {}
+
+
   ngOnInit() {
-    this.song = {
-      id: 2,
-      title: 'No more',
-      singer: 'Jackson 5',
-      msg: 'Love child',
-      active: false
-    };
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id'];
-      this.res = this.songService.getSongById(this.id).subscribe(song => {
-        this.song = song;
+    this.res = this.route.params.subscribe(data => {
+      this.songService.getSongById(data['id']).subscribe(res => {
+        this.song = res;
       });
     });
   }
+
   ngOnDestroy() {
-    this.sub.unsubscribe();
     this.res.unsubscribe();
   }
 }

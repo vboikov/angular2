@@ -1,0 +1,25 @@
+form{
+  max-width:40%;
+  min-width: 20%;
+  display: block;
+  margin: 0 auto;
+}
+
+form input{
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+form label{
+  margin-bottom: 15px;
+  display: block;
+}
+form button{
+  width: 100%;
+  line-height: 20px;
+}
+form textarea{
+  max-width: 100%;
+  min-width: 100%;
+  margin-bottom: 30px;
+}
