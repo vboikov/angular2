@@ -24,6 +24,7 @@ export class TabsComponent implements OnInit {
     this.songs = [];
   };
   ngOnInit() {
+
     this.songService.getSongs().subscribe(songs => {
       this.songs = songs;
     });

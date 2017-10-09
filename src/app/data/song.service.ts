@@ -11,32 +11,46 @@ import {Observable} from "rxjs/Observable";
 
 
 
-
 @Injectable()
 export class SongService {
+  private amount: number = 0;
+  public itemId: any;
   private items: FirebaseListObservable<Song[]>;
-  private item: FirebaseObjectObservable<any>;
   constructor(private db: AngularFireDatabase ) {}
 
 
   getSongs(){
-    this.items = <FirebaseListObservable<Song[]>>this.db.list("songs").map(data => {
-        return data;
+
+    this.items = <FirebaseListObservable<Song[]>>this.db.list('songs').map(data => {
+      this.amount = data.length;
+      return data;
     });
-    // this.items.subscribe(items => {
-    //   return items;
-    // });
     return this.items;
   }
 
-  getSongById(id): FirebaseObjectObservable<Song>{
-    return <FirebaseObjectObservable<Song>>this.db.object("songs/" + id).map(data => {
+
+
+  getSongById(id): any{
+    this.itemId = <FirebaseListObservable<Song>>this.db.list('songs', ref => ref.orderByChild('id').equalTo(id)).map(data => {
       return data;
     });
+    return this.itemId;
+
   }
 
+
+
   addSong(song: Song): void{
-    this.items.push({singer: song.singer, title: song.title, msg: song.msg, infoSong: song.infoSong, id: song.id})
+    const itemSong = {
+      singer: song.singer,
+      title: song.title,
+      msg: song.msg,
+      infoSong: song.infoSong,
+      id: this.amount
+    };
+    this.items.push(itemSong);
+
+
   }
 
   deleteSong(i): void{

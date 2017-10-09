@@ -23,11 +23,8 @@ export class SongResolver implements Resolve<FirebaseObjectObservable<any>> {
     // console.log(song);
     return new Promise((resolve,reject) => {
       song.first().subscribe(() => {
-        // console.log(song);
         resolve(song)
       }, reject)
     });
-    // return this.songService.getSongById(route.params['id']);
-
   }
 }

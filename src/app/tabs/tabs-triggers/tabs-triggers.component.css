@@ -4,9 +4,11 @@
   min-width: 25%;
   text-align: center;
   border:1px solid #000;
+  margin-bottom: 30px;
   display: block;
   float: left;
   cursor: pointer;
+  position: relative;
 }
 
 .trigger h2{
@@ -20,4 +22,17 @@
 }
 .active h2{
   color: #fff;
+}
+
+span{
+  position: absolute;
+  right: 0;
+  top: -20px;
+  display: block;
+  z-index: 100;
+  cursor: pointer;
+}
+
+span:hover{
+  outline:1px solid #000000;
 }

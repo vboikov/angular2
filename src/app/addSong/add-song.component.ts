@@ -30,6 +30,7 @@ export class AddSongComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.formControlDir.form.valueChanges.subscribe(value => {
       this.formValue = value;
     });

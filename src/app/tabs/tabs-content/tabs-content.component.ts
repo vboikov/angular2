@@ -28,8 +28,8 @@ export class TabsContentComponent implements OnInit, OnDestroy  {
   ngOnInit() {
     this.res = this.route.params.subscribe(data => {
       this.songService.getSongById(data['id']).subscribe(res => {
-        this.song = res;
-      });
+        this.song = res[data['id']];
+      })
     });
   }
 
