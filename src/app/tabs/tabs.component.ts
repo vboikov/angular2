@@ -21,10 +21,10 @@ export class TabsComponent implements OnInit {
 
   constructor(
     private songService: SongService) {
-    this.songs = [];
+    // this.songs = [];
   };
   ngOnInit() {
-
+    // this.songs = this.data;
     this.songService.getSongs().subscribe(songs => {
       this.songs = songs;
     });
