@@ -13,12 +13,13 @@
 
 .trigger h2{
   font-size: 16px;
-  font-weight: 400;
   line-height: 40px;
+  font-family: 'Rye', cursive;
 }
 
 .active{
-  background: darkblue;
+  background: #ff926d;
+  outline:none;
 }
 .active h2{
   color: #fff;

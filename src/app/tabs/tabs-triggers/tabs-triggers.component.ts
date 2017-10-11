@@ -10,23 +10,27 @@ import { SongService } from '../../data/song.service';
 })
 export class TabsTriggersComponent {
   @Input() data: Song[];
-  @Output() idx: EventEmitter<number> = new EventEmitter<number>();
+  @Output() idx = new EventEmitter<number>();
 
-
-  public activeIndex: number;
-  public check;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private songService: SongService
   ) {}
-  onClickIdx(i) {
+
+
+  onChangeSong(i) {
     this.idx.emit(i);
   }
 
+
   deleteSong(i){
     this.songService.deleteSong(i);
+  }
+
+  ngOnInit(){
+
   }
 
 

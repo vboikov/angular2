@@ -1,20 +1,20 @@
 <form #addSongForm="ngForm" (ngSubmit)="onSubmit(formValue)">
   <div class="field">
     <label for="title">Song title</label>
-    <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl >
+    <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl placeholder="Type a title">
   </div>
   <div class="field">
     <label for="singer">Singer</label>
-    <input type="text" name="singer" id="singer" ngModel>
+    <input type="text" name="singer" id="singer" ngModel placeholder="Type a singer">
   </div>
   <div class="field">
     <label for="msg">Song message</label>
-    <input type="text" name="msg" id="msg" ngModel >
+    <input type="text" name="msg" id="msg" ngModel placeholder="Type a message">
   </div>
   <!--<div class="field"><label for="id">Id</label><input type="number" name="id" id="id" ngModel></div>-->
   <div class="field">
     <label for="infoSong">Info song</label>
-    <textarea name="infoSong" id="infoSong" cols="30" rows="10" ngModel></textarea>
+    <textarea name="infoSong" id="infoSong" cols="30" rows="10" ngModel placeholder="Type a information"></textarea>
   </div>
   <button type="submit">Add song</button>
 </form>

@@ -10,24 +10,15 @@ import { SongService } from '../data/song.service';
 
 
 export class TabsComponent implements OnInit {
-  @Input() data: Song[];
-  @Output() idx: EventEmitter<number> = new EventEmitter<number>();
 
-
-
-
-  song: Song;
   songs: Song[];
 
   constructor(
     private songService: SongService) {
-    // this.songs = [];
   };
   ngOnInit() {
-    // this.songs = this.data;
     this.songService.getSongs().subscribe(songs => {
       this.songs = songs;
     });
   }
-
 }

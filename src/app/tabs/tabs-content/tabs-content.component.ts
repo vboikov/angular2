@@ -13,10 +13,9 @@ import { Song } from '../../data/song';
   styleUrls: ['./tabs-content.component.css']
 })
 export class TabsContentComponent implements OnInit, OnDestroy  {
-  @Input() data: Song;
-  private song: {};
   private id: number;
   private res;
+  public song: Song;
 
   constructor(
     private route: ActivatedRoute,

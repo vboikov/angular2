@@ -1,25 +1,49 @@
 form{
-  max-width:40%;
+  max-width:80%;
   min-width: 20%;
   display: block;
   margin: 0 auto;
+  background: rgba(255,255,255,0.5);
+  padding: 20px;
 }
 
 form input{
   width: 100%;
   margin-bottom: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  text-indent: 15px;
+  font-family: 'Rye', cursive;
 }
 
 form label{
   margin-bottom: 15px;
   display: block;
+  font-family: 'Rye', cursive;
 }
 form button{
-  width: 100%;
-  line-height: 20px;
+  width: 30%;
+  display: block;
+  margin: 0 auto;
+  line-height: 30px;
+  background: #6f4c90;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  border:0;
+  font-family: 'Nosifer', cursive;
+
+}
+form button:hover {
+  background: #4d356b;
+
 }
 form textarea{
   max-width: 100%;
   min-width: 100%;
   margin-bottom: 30px;
+  font-family: 'Rye', cursive;
+  text-indent: 15px;
+  padding-top: 10px;
+  font-size: 16px;
 }

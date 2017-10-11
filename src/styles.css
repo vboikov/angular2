@@ -7,6 +7,12 @@
 }
 html{
   padding: 20px;
+  background: url("assets/images/bg.jpg");
+  background-position: top left;
+  background-repeat: repeat;
+}
+app-tabs-triggers{
+
 }
 app-tabs-triggers,
 app-tabs-content{
@@ -15,8 +21,50 @@ app-tabs-content{
   width: 100%;
   margin-top:20px;
   margin-bottom: 20px;
+  padding: 20px 20px 0 20px;
+  background: rgba(255,255,255,0.7);
+}
+nav{
+  background: #6f4c90;
+  line-height: 40px;
 }
 nav ul li{
   list-style: none;
   display: inline-block;
+  width: 33%;
+  text-align: center;
+  line-height: 40px;
+  position: relative;
+}
+nav ul li:after{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 40px;
+  background: #fff;
+  content: '';
+}
+
+nav ul li:last-child:after{
+  display: none;
+}
+nav ul li a{
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  display: inline-block;
+  line-height: 40px;
+  font-family: 'Nosifer', cursive;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  transition: 0.5s;
+}
+nav ul li a:hover {
+  -moz-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
+  transform: rotate(1deg);
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  transition: 0.5s;
 }
