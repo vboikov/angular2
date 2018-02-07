@@ -1,0 +1,95 @@
+span {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border: 2px solid #fff;
+    text-align: center;
+    position: relative;
+}
+
+span:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    color: #fff;
+}
+
+span.play:after {
+    content: '\25BA';
+    margin-right: -3px;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+span.stop:after {
+    content: '\25A0';
+    line-height: 19px;
+    font-size: 22px;
+}
+
+.progress {
+    width: 100%;
+    float: left;
+    height: 10px;
+    background: #bababa;
+    cursor: pointer;
+    outline: none;
+}
+
+.songTime {
+    background: #dc7001;
+    height: 10px;
+    float: left;
+    max-width: 100%;
+    outline: none;
+    -moz-transition: .2s;
+    -ms-transition: .2s;
+    transition: .2s;
+}
+
+.controls {
+    padding: 5px;
+    width: 100%;
+    float: left;
+}
+
+.songControls {
+    width: 20%;
+    float: left;
+}
+
+.songInfo {
+    width: 80%;
+    float: left;
+    color: #fff;
+}
+
+button {
+    outline: none;
+    border: none;
+    background: #6e4b8f;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+:host {
+    background: #6e4b8f;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 90%;
+    height: 50px;
+}
+
+
+@media (min-width: 500px) {
+
+}

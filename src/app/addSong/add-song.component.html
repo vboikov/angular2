@@ -1,20 +1,35 @@
+<div class="progress">
+    <div class="progressBar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+    <div class="progressBarOrange" [ngStyle]="{ 'width': 100 - currentUpload?.progress + '%' }"></div>
+</div>
 <form #addSongForm="ngForm" (ngSubmit)="onSubmit(formValue)">
-  <div class="field">
-    <label for="title">Song title</label>
-    <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl placeholder="Type a title">
-  </div>
-  <div class="field">
-    <label for="singer">Singer</label>
-    <input type="text" name="singer" id="singer" ngModel placeholder="Type a singer">
-  </div>
-  <div class="field">
-    <label for="msg">Song message</label>
-    <input type="text" name="msg" id="msg" ngModel placeholder="Type a message">
-  </div>
-  <!--<div class="field"><label for="id">Id</label><input type="number" name="id" id="id" ngModel></div>-->
-  <div class="field">
-    <label for="infoSong">Info song</label>
-    <textarea name="infoSong" id="infoSong" cols="30" rows="10" ngModel placeholder="Type a information"></textarea>
-  </div>
-  <button type="submit">Add song</button>
+    <div class="field uploadWrap" [ngClass]="selectedFiles ? 'detected' : 'empty'">
+        <label for="upload">
+            <input type="file" id="upload" (change)="detectFiles($event)">
+            <span *ngIf="!selectedFiles">No file</span><span *ngIf="selectedFiles">File detected</span>
+        </label>
+    </div>
+    <div class="field hidden" *ngIf="selectedFiles">
+        <input type="text" name="url" [(ngModel)]="selectedFiles[0].name" id="url" ngModel>
+    </div>
+    <div class="field">
+        <label for="title">Song title</label>
+        <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl placeholder="Type a title" required>
+    </div>
+    <div class="field">
+        <label for="singer">Singer</label>
+        <input type="text" name="singer" id="singer" ngModel placeholder="Type a singer" required>
+    </div>
+    <div class="field">
+        <label for="album">Album</label>
+        <input type="text" name="album" id="album" ngModel placeholder="Type an album" required>
+    </div>
+
+    <div class="field">
+        <label for="infoSong">Info song</label>
+        <textarea name="infoSong" id="infoSong" cols="30" rows="10" ngModel placeholder="Type a information"
+                  required></textarea>
+    </div>
+
+    <button type="submit">Add song</button>
 </form>

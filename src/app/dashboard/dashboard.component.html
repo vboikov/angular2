@@ -1,0 +1,5 @@
+<header-shelf (messageEvent)="receiveMessage($event)"></header-shelf>
+<nav-shelf [ngClass]="menuState ? 'active' : 'hide'"></nav-shelf>
+<section class="mainDisplay" [ngClass]="menuState ? 'min' : 'full'">
+  <router-outlet></router-outlet>
+</section>

@@ -1,49 +1,124 @@
-form{
-  max-width:80%;
-  min-width: 20%;
-  display: block;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.5);
-  padding: 20px;
+.progress {
+    width: 100%;
+    height: 15px;
 }
 
-form input{
-  width: 100%;
-  margin-bottom: 30px;
-  line-height: 30px;
-  font-size: 16px;
-  text-indent: 15px;
-  font-family: 'Rye', cursive;
+.progressBar {
+    background: #6f4c90;
+    height: 15px;
+    width: 0;
+    display: block;
+    float: left;
 }
 
-form label{
-  margin-bottom: 15px;
-  display: block;
-  font-family: 'Rye', cursive;
+.progressBarOrange {
+    background: #dc7001;
+    height: 15px;
+    width: 0;
+    display: block;
+    float: left;
 }
-form button{
-  width: 30%;
-  display: block;
-  margin: 0 auto;
-  line-height: 30px;
-  background: #6f4c90;
-  color: #fff;
-  text-transform: uppercase;
-  cursor: pointer;
-  border:0;
-  font-family: 'Nosifer', cursive;
+
+form {
+    max-width: 80%;
+    min-width: 20%;
+    display: block;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+}
+
+form input {
+    width: 100%;
+    margin-bottom: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    text-indent: 15px;
+}
+
+form input[type=file] {
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 100;
+}
+
+form label {
+    margin-bottom: 15px;
+    display: block;
+}
+
+form button {
+    width: 30%;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    line-height: 30px;
+    background: #6f4c90;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
 
 }
+
 form button:hover {
-  background: #4d356b;
+    background: #4d356b;
 
 }
-form textarea{
-  max-width: 100%;
-  min-width: 100%;
-  margin-bottom: 30px;
-  font-family: 'Rye', cursive;
-  text-indent: 15px;
-  padding-top: 10px;
-  font-size: 16px;
+
+form textarea {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 120px;
+    margin-bottom: 15px;
+    text-indent: 15px;
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+#upload {
+    opacity: 0;
+}
+
+.uploadWrap {
+    position: relative;
+    background: #6f4c90;
+}
+
+.uploadWrap:after {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 6px;
+    top: 6px;
+    content: '';
+    border: 2px solid #fff;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 24px;
+}
+
+.hidden {
+    height: 0;
+    opacity: 0;
+}
+
+.uploadWrap span {
+    position: absolute;
+    left: 55px;
+    top: 15px;
+    color: #fff;
+}
+
+.uploadWrap.detected:after {
+    content: '\2714';
+}
+
+@media (max-width: 670px) {
+    form{
+        max-width:100%;
+    }
+    form input {
+        margin-bottom: 15px;
+    }
 }

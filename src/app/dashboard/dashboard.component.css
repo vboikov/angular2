@@ -1,0 +1,22 @@
+
+
+.mainDisplay{
+  width: 90%;
+  display: block;
+  float: left;
+}
+
+
+@media (max-width: 550px) {
+  .mainDisplay.min {
+    width: 100%;
+  }
+  .mainDisplay.full {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 551px) and (max-width: 1080px) {
+  .mainDisplay{width: 78%;}
+}

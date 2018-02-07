@@ -1,4 +1,8 @@
 <div class="tabContent" >
-  <h1>  {{song.singer}}  </h1>
-  <h2>  {{song.msg}}  </h2>
+  <h4>  {{song.singer}}  </h4>
+  <h5>  {{song.msg}}  </h5>
+  <audio #audioOption>
+    <source [src]="audio.src" type="audio/mp3">
+  </audio>
+  <button (click)="playAudio()"><span *ngIf="!stateAudio">play</span><span *ngIf="stateAudio">pause</span></button>
 </div>

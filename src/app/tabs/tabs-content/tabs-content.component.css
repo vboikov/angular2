@@ -4,5 +4,12 @@
   border:1px solid #000;
   padding: 15px;
   margin-bottom: 30px;
-  font-family: 'Rye', cursive;
+}
+
+:host{
+  height: 20vh;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }

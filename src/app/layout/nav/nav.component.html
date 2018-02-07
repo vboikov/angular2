@@ -1,0 +1,10 @@
+<nav>
+    <ul>
+        <li><a [routerLink]="['playlists']" routerLinkActive="active">Playlists</a></li>
+        <li><a disabled routerLinkActive="active">Playlists edit</a></li>
+        <li>
+            <button (click)="logout()" *ngIf="loggedUser">Log Out</button>
+        </li>
+    </ul>
+</nav>
+

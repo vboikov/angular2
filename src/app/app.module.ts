@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule, routedComponents } from './router.module';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AngularFireModule } from 'angularfire2';
 import {AngularFireDatabase, AngularFireDatabaseModule, FirebaseListObservable} from 'angularfire2/database';
@@ -15,6 +14,15 @@ import {AngularFireDatabase, AngularFireDatabaseModule, FirebaseListObservable} 
 import { AppComponent } from './app.component';
 import { SongService } from './data/song.service';
 import { SongResolver } from './data/song.resolver';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
+import * as firebase from 'firebase/app';
+import {MovieService} from './data/movie.service';
+import {AuthService} from './auth/auth.service';
+import {AuthorizedGuard} from './shared/guards/authorized.guard';
+import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
+import {UploadService} from './data/upload.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg",
@@ -37,9 +45,10 @@ export const firebaseConfig = {
     AppRoutingModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [SongService, SongResolver],
+  providers: [SongService, SongResolver, MovieService, AuthService, AuthorizedGuard, UnauthorizedGuard, UploadService],
   bootstrap: [AppComponent]
 })
 
