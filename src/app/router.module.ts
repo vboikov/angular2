@@ -2,9 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
-import {TabsComponent} from './tabs/tabs.component';
-import {TabsTriggersComponent} from './tabs/tabs-triggers/tabs-triggers.component';
-import {TabsContentComponent} from './tabs/tabs-content/tabs-content.component';
 import {AddSongComponent} from './addSong/add-song.component'
 import {PlaylistsComponent} from './playlists/playlists.component';
 import {SongResolver} from './data/song.resolver';
@@ -57,9 +54,6 @@ export class AppRoutingModule {
 }
 export const routedComponents = [
 	AppComponent,
-	TabsTriggersComponent,
-	TabsContentComponent,
-	TabsComponent,
 	PlaylistsComponent,
 	AddSongComponent,
 	AuthComponent,
