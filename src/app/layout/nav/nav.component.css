@@ -17,7 +17,6 @@ nav li {
     position: relative;
 }
 
-
 nav ul li:after {
     position: absolute;
     bottom: 0;
