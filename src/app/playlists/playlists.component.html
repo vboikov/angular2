@@ -1,10 +1,9 @@
 <div class="playlistControl">
-    <select name="" id="" placeholder="Choose playlist">
-        <option value="" selected>Choose playlist</option>
-        <option value="1">1</option>
+    <select name="" id=""  placeholder="Choose playlist" (change)="onListChange($event)" [ngModel]="choosePlaylist">
+        <option [value]="list.id" *ngFor="let list of playlists; let i=index">{{list.title}}</option>
     </select>
     <button [routerLink]="['../addlist']">Add playlist</button>
-    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd" >Add song</a>
+    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd">Add song</a>
 </div>
 <app-playlist-item [data]="songs" (selectedSong)="onSongClick($event)"></app-playlist-item>
 <footer-shelf [selectedSong]="selectedSong" *ngIf="selectedSong"></footer-shelf>

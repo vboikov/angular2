@@ -1,7 +1,32 @@
+<div class="progress">
+    <!--<div class="progressBar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>-->
+    <!--<div class="progressBarOrange" [ngStyle]="{ 'width': 100 - currentUpload?.progress + '%' }"></div>-->
+</div>
+<div class="playlistControl">
+    <h2>Add songs</h2>
+    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd" >Add song</a>
+</div>
 <form #addPlaylistForm="ngForm" (ngSubmit)="onSubmit(formValue)">
     <div class="field">
         <label for="title">Playlist title</label>
         <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl placeholder="Type a title" required>
     </div>
+    <div class="field" *ngFor="let song of songs; let i=index">
+        <div class="checkbox">
+            <input type="checkbox" (change)="onAddToPlaylist($event, song)">
+        </div>
+        <div class="trigger">
+            <div (click)="onSongClick(song)">
+                <div class="songInfo">
+                    <h4>{{song.singer}}</h4>
+                    <h5>{{song.title}}</h5>
+                </div>
+                <div class="songControls">
+                    <button><span class="play"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
     <button type="submit">Add playlist</button>
 </form>
+<footer-shelf [selectedSong]="selectedSong" *ngIf="selectedSong"></footer-shelf>
