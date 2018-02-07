@@ -6,7 +6,7 @@
 </audio>
 <div class="controls">
     <div class="songControls">
-        <button (click)="takeUrl()"><span [ngClass]="playStatus ? 'stop' : 'play'"  ></span></button>
+        <button (click)="takeUrl(!playStatus)"><span [ngClass]="playStatus ? 'stop' : 'play'"  ></span></button>
     </div>
 
     <div class="songInfo">

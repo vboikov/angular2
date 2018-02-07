@@ -1,8 +1,5 @@
-import {Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild} from '@angular/core';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild, OnChanges} from '@angular/core';
 import * as firebase from 'firebase/app';
-import {Observable} from 'rxjs/Observable';
-import {AuthService} from '../../auth/auth.service';
 import {Router} from '@angular/router';
 import {Song} from '../../data/song';
 import {SongService} from '../../data/song.service';
@@ -12,27 +9,32 @@ import {SongService} from '../../data/song.service';
 	templateUrl: './footer.component.html',
 	styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements AfterViewInit {
+export class FooterComponent implements AfterViewInit, OnChanges {
 	@ViewChild('trackTime') trackTime: ElementRef;
 	@Input() selectedSong: Song;
 	song: Song;
-	windowWidth: any;
 	storage = firebase.storage();
 	starsRefAudio: any;
 	playStatus: boolean = false;
 	audio: HTMLAudioElement;
 
-	constructor(public songService: SongService, public router: Router) {
-		this.windowWidth = window.screen.width;
+	constructor() {
 		this.audio = new Audio();
+	}
+
+	ngOnChanges() {
+		if  (this.playStatus) {
+			this.takeUrl(this.playStatus);
+		}
 	}
 
 
 	ngAfterViewInit() {
-
+		this.takeUrl(!this.playStatus);
 	}
 
-	takeUrl() {
+	takeUrl(status: boolean) {
+		this.playStatus = !status;
 		let trackTime = this.trackTime.nativeElement;
 		this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
 		if (!this.playStatus) {
@@ -40,6 +42,7 @@ export class FooterComponent implements AfterViewInit {
 				let track = this.audio;
 				this.audio.src = data;
 				this.audio.play();
+				this.playStatus = !this.playStatus;
 				trackTime.addEventListener('click', function (e) {
 					let timeStamp = e.offsetX / trackTime.offsetWidth;
 					track.pause();
@@ -50,10 +53,11 @@ export class FooterComponent implements AfterViewInit {
 		}
 		else {
 			this.audio.pause();
-			this.audio.currentTime = 0;
-			this.audio = new Audio();
+			// this.audio.currentTime = 0;
+			this.playStatus = !this.playStatus;
+
+			// this.audio = new Audio();
 		}
-		this.playStatus = !this.playStatus;
 	}
 
 

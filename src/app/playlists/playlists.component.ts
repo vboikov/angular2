@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import {Song} from '../data/song';
 import {SongService} from '../data/song.service';
 import {AuthService} from '../auth/auth.service';
@@ -13,6 +13,7 @@ import {FooterComponent} from '../layout/footer/footer.component';
 
 export class PlaylistsComponent implements OnInit {
 	@Input() data: Song;
+	@ViewChild(FooterComponent) footer;
 	songs: Song[];
 	selectedSong: Song;
 
