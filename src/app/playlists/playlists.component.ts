@@ -13,7 +13,7 @@ import {Playlist} from '../data/playlist';
 })
 
 
-export class PlaylistsComponent implements OnInit {
+export class PlaylistsComponent implements OnInit, OnChanges {
 	@Input() data: Song;
 	@ViewChild(FooterComponent) footer;
 	songs: Song[];
@@ -30,13 +30,18 @@ export class PlaylistsComponent implements OnInit {
 		// });
 		this.playlistService.getPlaylists().subscribe(playlists => {
 			this.playlists = playlists;
-			this.songs = this.playlists[1].songs;
+			this.songs = this.playlists[0].songs;
 		})
 
 	}
 
-	onListChange(event){
+	ngOnChanges() {
 		console.log(this.choosePlaylist);
+	}
+	
+	onListChange(event){
+		this.songs = event.songs;
+
 	}
 
 	onSongClick(song: Song): void {

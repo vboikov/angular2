@@ -6,7 +6,7 @@
     <h2>Add songs</h2>
     <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd" >Add song</a>
 </div>
-<form #addPlaylistForm="ngForm" (ngSubmit)="onSubmit(formValue)">
+<form #addPlaylistForm="ngForm" (ngSubmit)="onSubmit(title)">
     <div class="field">
         <label for="title">Playlist title</label>
         <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl placeholder="Type a title" required>
