@@ -32,19 +32,21 @@ span.play:after {
 span.stop:after {
     content: '\25A0';
     line-height: 19px;
-    font-size: 22px;
+    font-size: 24px;
 }
+
 
 span.prevSong:after {
-    content: '\23EE';
-    line-height: 19px;
-    font-size: 22px;
+    content: '\2190';
+    line-height: 21px;
+    font-size: 20px;
 }
 
+
 span.nextSong:after {
-    content: '\25B6';
-    line-height: 19px;
-    font-size: 22px;
+    content: '\2192';
+    line-height: 21px;
+    font-size: 20px;
 }
 
 .progress {

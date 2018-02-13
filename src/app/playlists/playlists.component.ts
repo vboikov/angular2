@@ -25,12 +25,10 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 	};
 
 	ngOnInit() {
-		// this.songService.getSongs().subscribe(songs => {
-		// 	this.songs = songs;
-		// });
 		this.playlistService.getPlaylists().subscribe(playlists => {
 			this.playlists = playlists;
 			this.songs = this.playlists[0].songs;
+			this.choosePlaylist = playlists[0];
 		})
 
 	}
@@ -41,6 +39,7 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 	
 	onListChange(event){
 		this.songs = event.songs;
+		this.selectedSong = this.songs[0];
 
 	}
 

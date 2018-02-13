@@ -67,8 +67,9 @@ export class AddListComponent implements OnInit {
 	}
 
 	onSubmit(title) {
-		if (title) {
+		if (title && this.playlistSongs.length) {
 			this.playlistService.addPlaylist(title, this.playlistSongs);
+			this.router.navigate(['playlists']);
 		}
 		else {
 			alert('Please fill all fields');

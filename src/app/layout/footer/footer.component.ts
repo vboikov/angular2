@@ -12,6 +12,8 @@ import {SongService} from '../../data/song.service';
 export class FooterComponent implements AfterViewInit, OnChanges {
 	@ViewChild('trackTime') trackTime: ElementRef;
 	@Input() selectedSong: Song;
+	@Input() songs: Song[];
+
 	song: Song;
 	storage = firebase.storage();
 	starsRefAudio: any;
@@ -23,11 +25,10 @@ export class FooterComponent implements AfterViewInit, OnChanges {
 	}
 
 	ngOnChanges() {
-		if  (this.playStatus) {
+		if (this.playStatus) {
 			this.takeUrl(this.playStatus);
 		}
 	}
-
 
 	ngAfterViewInit() {
 		this.takeUrl(!this.playStatus);
@@ -40,25 +41,48 @@ export class FooterComponent implements AfterViewInit, OnChanges {
 		if (!this.playStatus) {
 			this.starsRefAudio.getDownloadURL().then(data => {
 				let track = this.audio;
-				this.audio.src = data;
-				this.audio.play();
+				track.pause();
+				track.src = data;
+				track.play();
 				this.playStatus = !this.playStatus;
 				trackTime.addEventListener('click', function (e) {
 					let timeStamp = e.offsetX / trackTime.offsetWidth;
-					track.pause();
 					track.currentTime = track.duration * timeStamp;
-					track.play();
 				}, true);
+			}, err => {
+				console.log(err);
 			});
 		}
 		else {
 			this.audio.pause();
-			// this.audio.currentTime = 0;
 			this.playStatus = !this.playStatus;
-
-			// this.audio = new Audio();
 		}
 	}
+
+	changeSong(state: boolean) {
+		let amount = this.songs.length - 1;
+		let indexOfSong = this.songs.indexOf(this.selectedSong);
+		if (state) {
+			let step = indexOfSong + 1;
+			if (indexOfSong === amount) {
+				this.selectedSong = this.songs[0];
+			}
+			if (indexOfSong !== amount) {
+				this.selectedSong = this.songs[step];
+			}
+		}
+		if (!state) {
+			let step = indexOfSong - 1;
+			if (indexOfSong === 0) {
+				this.selectedSong = this.songs[amount];
+			}
+			if (indexOfSong !== 0) {
+				this.selectedSong = this.songs[step];
+			}
+		}
+		this.takeUrl(this.playStatus);
+	}
+
 
 
 }

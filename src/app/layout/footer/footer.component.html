@@ -6,9 +6,9 @@
 </audio>
 <div class="controls">
     <div class="songControls">
-        <button (click)="prevSong()"><span class="prevSong"></span></button>
+        <button (click)="changeSong(false)"><span class="prevSong"></span></button>
         <button (click)="takeUrl(!playStatus)"><span [ngClass]="playStatus ? 'stop' : 'play'"  ></span></button>
-        <button (click)="nextSong()"><span class="nextSong"></span></button>
+        <button (click)="changeSong(true)"><span class="nextSong"></span></button>
 
     </div>
 

@@ -49,7 +49,7 @@ h2 {
 }
 
 .checkbox {
-    width: 20%;
+    width: 10%;
     height: 42px;
     position: relative;
     display: block;
@@ -113,8 +113,8 @@ form button[type=submit]:hover {
 }
 
 .trigger {
-    max-width: 80%;
-    width: 80%;
+    max-width: 90%;
+    width: 90%;
     border: 1px solid #000;
     margin-bottom: 15px;
     display: block;
