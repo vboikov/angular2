@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {Playlist} from './playlist';
 import {Song} from './song';
 
@@ -15,9 +15,7 @@ export class PlaylistService {
 	public itemId: any;
 	private items: FirebaseListObservable<Playlist[]>;
 
-	constructor(private db: AngularFireDatabase) {
-	}
-
+	constructor(private db: AngularFireDatabase) {}
 
 	getPlaylists() {
 		this.items = <FirebaseListObservable<Playlist[]>>this.db.list('playlists').map(data => {
@@ -27,15 +25,12 @@ export class PlaylistService {
 		return this.items;
 	}
 
-
 	getPlaylistById(id): any {
-		this.itemId = <FirebaseListObservable<Playlist>>this.db.list('playlist', ref => ref.orderByChild('id').equalTo(id)).map(data => {
-			return data;
+		this.itemId = this.db.list('playlists').map(data => {
+			return data[id];
 		});
 		return this.itemId;
-
 	}
-
 
 	addPlaylist(title, songs: Song[]): void {
 		this.getPlaylists();
@@ -51,4 +46,9 @@ export class PlaylistService {
 		this.db.object('playlists/' + i).remove();
 	}
 
+	updatePlaylist(playlist): void {
+		let path = 'playlists/'+ playlist.$key;
+		this.db.object(path).update(playlist)
+		.catch(error => console.log(error));
+	}
 }

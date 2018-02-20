@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {AddSongComponent} from './addSong/add-song.component'
 import {PlaylistsComponent} from './playlists/playlists.component';
-import {SongResolver} from './data/song.resolver';
+import {PlaylistResolver} from './data/playlist.resolver';
 import {AuthComponent} from './auth/auth.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HeaderComponent} from './layout/header/header.component';
@@ -15,6 +15,7 @@ import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
 import {UploadComponent} from './layout/upload/upload.component';
 import {AddListComponent} from './playlists/addlist/addlist.component';
 import {PlaylistItemComponent} from './playlists/playlist-item/playlist-item.component';
+import {PlaylistEditComponent} from './playlists/playlist-edit/playlist-edit.component';
 
 export const routes: Routes = [
 	{
@@ -35,8 +36,15 @@ export const routes: Routes = [
 			{path: 'addsong', component: AddSongComponent, canActivate: [AuthorizedGuard]},
 			{path: 'playlists', component: PlaylistsComponent, canActivate: [AuthorizedGuard]},
 			{path: 'addlist', component: AddListComponent, canActivate: [AuthorizedGuard]},
+			{
+				path: 'playlists-edit/:id',
+				component: PlaylistEditComponent,
+				canActivate: [AuthorizedGuard],
+				resolve: {
+					playlist: PlaylistResolver
+				}
+			},
 			{path: 'upload', component: UploadComponent, canActivate: [AuthorizedGuard]},
-			// {path: 'songs', component: TabsComponent, canActivate: [AuthorizedGuard]}
 		]
 	}
 ];
@@ -52,6 +60,7 @@ export const routes: Routes = [
 
 export class AppRoutingModule {
 }
+
 export const routedComponents = [
 	AppComponent,
 	PlaylistsComponent,
@@ -63,5 +72,6 @@ export const routedComponents = [
 	FooterComponent,
 	UploadComponent,
 	AddListComponent,
-	PlaylistItemComponent
+	PlaylistItemComponent,
+	PlaylistEditComponent
 ];

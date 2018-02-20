@@ -28,6 +28,7 @@ export class AddListComponent implements OnInit {
 	playlistSongs: Song[] = [];
 	selectedSong: Song;
 	playStatus: boolean = false;
+
 	constructor(private router: Router, private songService: SongService, private playlistService: PlaylistService) {
 	};
 
@@ -36,26 +37,23 @@ export class AddListComponent implements OnInit {
 		this.songService.getSongs().subscribe(songs => {
 			this.songs = songs;
 		});
-
 		this.formControlDir.form.valueChanges.subscribe(value => {
 			this.formValue = value;
 
 		});
-
 		this.nameControlDir.control.valueChanges.subscribe(value => {
 			this.nameValue = value;
 		});
-
 	}
 
 	onAddToPlaylist(e, song: Song) {
-		if (e.target.checked){
+		if (e.target.checked) {
 			this.playlistSongs.push(song);
 		}
 		else {
-			this.playlistSongs.forEach( (item, index) => {
-				if(item === song) {
-					this.playlistSongs.splice(index,1);
+			this.playlistSongs.forEach((item, index) => {
+				if (item === song) {
+					this.playlistSongs.splice(index, 1);
 				}
 			});
 		}

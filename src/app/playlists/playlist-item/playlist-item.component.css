@@ -1,7 +1,7 @@
-.trigger{
+.trigger {
     max-width: 100%;
     width: 100%;
-    border:1px solid #000;
+    border: 1px solid #000;
     margin-bottom: 15px;
     display: block;
     float: left;
@@ -9,33 +9,37 @@
     position: relative;
     padding: 5px;
 }
-.songControls{
+
+.songControls {
     width: 25%;
     float: right;
 }
-.songInfo{
+
+.songInfo {
     width: 75%;
     float: left;
 }
 
-.trigger h4{
+.trigger h4 {
     font-size: 16px;
     text-transform: capitalize;
 }
 
-.trigger h5{
+.trigger h5 {
     font-size: 14px;
     text-transform: capitalize;
 }
 
-.active{
+.active {
     background: #ff926d;
-    outline:none;
+    outline: none;
 }
-.active h2{
+
+.active h2 {
     color: #fff;
 }
-.trigger button{
+
+.trigger button {
     outline: none;
     border: none;
     background: #6e4b8f;
@@ -46,7 +50,7 @@
     cursor: pointer;
 }
 
-span{
+span {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -57,6 +61,7 @@ span{
     text-align: center;
     position: relative;
 }
+
 span:after {
     position: absolute;
     left: 0;
@@ -66,12 +71,14 @@ span:after {
     margin: auto;
     color: #fff;
 }
-span.play:after{
+
+span.play:after {
     content: '\25BA';
     margin-right: -3px;
     font-size: 14px;
     line-height: 26px;
 }
+
 span.stop:after {
     content: '\25A0';
     line-height: 19px;

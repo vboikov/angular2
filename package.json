@@ -28,6 +28,7 @@
     "rxjs": "5.4.3",
     "systemjs": "0.19.47",
     "ts-helpers": "1.1.1",
+    "underscore": "^1.8.3",
     "zone.js": "0.8.5"
   },
   "devDependencies": {

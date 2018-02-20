@@ -3,8 +3,8 @@
         <option selected disabled>Choose playlist</option>
         <option [ngValue]="list" *ngFor="let list of playlists; let i=index">{{list.title}}</option>
     </select>
+    <button (click)="edit(choosePlaylist.id)">Edit</button>
     <button [routerLink]="['../addlist']">Add playlist</button>
-    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd">Add song</a>
 </div>
 <app-playlist-item [data]="songs" (selectedSong)="onSongClick($event)"></app-playlist-item>
 <footer-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></footer-shelf>

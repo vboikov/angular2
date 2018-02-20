@@ -3,7 +3,6 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '
 import {AuthService} from '../../auth/auth.service';
 import 'rxjs/add/operator/first';
 
-
 @Injectable()
 export class UnauthorizedGuard implements CanActivate {
 

@@ -1,0 +1,271 @@
+section{
+    padding: 15px;
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+/*.playlistheader{*/
+    /*width: 100%;*/
+    /*float: left;*/
+    /*margin-bottom: 10px;*/
+    /*line-height: 35px;*/
+/*}*/
+
+/*.playlist{*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*height: auto;*/
+    /*float: left;*/
+    /*margin-bottom: 10px;*/
+    /*padding: 5px;*/
+    /*border: 1px solid #ebebeb;*/
+/*}*/
+
+/*.playlist h3, .playlist h4, .playlist button{*/
+    /*display: inline-block;*/
+/*}*/
+
+/*.playlist button{*/
+    /*float: right;*/
+    /*line-height: 36px;*/
+    /*padding: 0 10px 0 10px;*/
+    /*border: 1px solid #000;*/
+    /*cursor: pointer;*/
+    /*text-decoration: none;*/
+    /*color: #fff;*/
+    /*background: #6f4c90;*/
+    /*font-size: 16px;*/
+    /*margin-left: 5px;*/
+    /*margin-right: 5px;*/
+/*}*/
+
+/*.playlist h3{*/
+    /*font-size: 10px;*/
+    /*padding-left: 15px;*/
+/*}*/
+
+/*.playlistSongs{*/
+    /*display: block;*/
+    /*float: left;*/
+    /*width: 100%;*/
+    /*height: 38px;*/
+    /*line-height: 35px;*/
+    /*margin-bottom: 10px;*/
+    /*border: 1px solid #ebebeb;*/
+    /*padding-left: 10px;*/
+/*}*/
+
+/*.playlistSongs h5{*/
+    /*display: inline-block;*/
+    /*max-width: 33%;*/
+/*}*/
+
+@media (max-width: 600px) {
+    section{
+        max-height: 92vh;
+        overflow-y: scroll;
+    }
+}
+
+
+.progress {
+    width: 100%;
+    height: 15px;
+}
+
+.progressBar {
+    background: #6f4c90;
+    height: 15px;
+    width: 0;
+    display: block;
+    float: left;
+}
+
+.progressBarOrange {
+    background: #dc7001;
+    height: 15px;
+    width: 0;
+    display: block;
+    float: left;
+}
+
+.playlistControl {
+    padding: 15px;
+    border-bottom: 1px solid #000;
+}
+
+.playlistControl a {
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    border: 1px solid #000;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    background: #6f4c90;
+    font-size: 16px;
+}
+
+h2 {
+    display: inline-block;
+    width: 60%;
+    line-height: 1.2;
+}
+
+.trigger {
+    width: 80%;
+    display: block;
+    float: left;
+}
+
+.checkbox {
+    width: 10%;
+    height: 42px;
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.checkbox input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+
+.field {
+    width: 100%;
+}
+
+form {
+    width: 92%;
+    display: block;
+    margin: 0 auto;
+}
+
+form input[type=text] {
+    width: 100%;
+    margin-bottom: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    text-indent: 15px;
+}
+
+form input[type=file] {
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 100;
+}
+
+form label {
+    padding: 15px 0 15px 0;
+    display: block;
+}
+
+form button[type=submit] {
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    line-height: 30px;
+    background: #6f4c90;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+
+}
+
+form button[type=submit]:hover {
+    background: #4d356b;
+
+}
+
+.trigger {
+    max-width: 90%;
+    width: 90%;
+    border: 1px solid #000;
+    margin-bottom: 15px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+}
+
+.songControls {
+    width: 25%;
+    float: right;
+}
+
+.songInfo {
+    width: 75%;
+    float: left;
+}
+
+.trigger h4 {
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.trigger h5 {
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.active {
+    background: #ff926d;
+    outline: none;
+}
+
+.active h2 {
+    color: #fff;
+}
+
+.trigger button {
+    outline: none;
+    border: none;
+    background: #6e4b8f;
+    float: right;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+span {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border: 2px solid #fff;
+    text-align: center;
+    position: relative;
+}
+
+span:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    color: #fff;
+}
+
+span.play:after {
+    content: '\25BA';
+    margin-right: -3px;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+span.stop:after {
+    content: '\25A0';
+    line-height: 19px;
+    font-size: 22px;
+}
+

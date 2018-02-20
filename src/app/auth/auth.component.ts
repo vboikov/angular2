@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 	templateUrl: './auth.component.html',
 	styleUrls: ['./auth.component.css']
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit{
 	user: Observable<firebase.User>;
 	public loggedUser: any;
 
@@ -27,6 +27,5 @@ export class AuthComponent {
 			this.loggedUser = this.authService.currentUser;
 			this.router.navigate(['/musicshelf/playlists']);
 		});
-
 	}
 }

@@ -7,7 +7,7 @@ import {AppRoutingModule, routedComponents} from './router.module';
 
 
 import {AngularFireModule} from 'angularfire2';
-import {AngularFireDatabase, AngularFireDatabaseModule, FirebaseListObservable} from 'angularfire2/database';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 
 
 import {AppComponent} from './app.component';
@@ -16,13 +16,12 @@ import {SongResolver} from './data/song.resolver';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 
 
-import * as firebase from 'firebase/app';
-import {MovieService} from './data/movie.service';
 import {AuthService} from './auth/auth.service';
 import {AuthorizedGuard} from './shared/guards/authorized.guard';
 import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
 import {UploadService} from './data/upload.service';
 import {PlaylistService} from './data/playlist.service';
+import {PlaylistResolver} from './data/playlist.resolver';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg',
@@ -48,7 +47,16 @@ export const firebaseConfig = {
 		AngularFireDatabaseModule,
 		AngularFireAuthModule
 	],
-	providers: [SongService, PlaylistService, SongResolver, MovieService, AuthService, AuthorizedGuard, UnauthorizedGuard, UploadService],
+	providers: [
+		SongService,
+		PlaylistService,
+		SongResolver,
+		AuthService,
+		AuthorizedGuard,
+		UnauthorizedGuard,
+		UploadService,
+		PlaylistResolver
+	],
 	bootstrap: [AppComponent]
 })
 

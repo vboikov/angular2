@@ -28,10 +28,6 @@ app-playlist-item {
     padding: 20px;
 }
 
-footer-shelf {
-
-}
-
 :host {
     position: relative;
 }

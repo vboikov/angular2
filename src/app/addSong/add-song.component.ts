@@ -1,9 +1,8 @@
-import {Component, OnInit, Input, ViewChild, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {Song} from '../data/song';
 import {SongService} from '../data/song.service';
-import {FormsModule, NgForm, NgControl} from '@angular/forms'
+import {NgForm, NgControl} from '@angular/forms'
 import {Router} from '@angular/router';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
 import {Upload} from '../data/upload';
 import {UploadService} from '../data/upload.service';
 
@@ -33,15 +32,12 @@ export class AddSongComponent implements OnInit {
 
 
 	ngOnInit() {
-
 		this.formControlDir.form.valueChanges.subscribe(value => {
 			this.formValue = value;
 		});
-
 		this.nameControlDir.control.valueChanges.subscribe(value => {
 			this.nameValue = value;
 		});
-
 	}
 
 	onSubmit(obj) {

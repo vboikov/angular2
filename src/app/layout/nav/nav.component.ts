@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.css']
 })
-export class NavComponent {
+export class NavComponent implements OnInit {
 	user: Observable<firebase.User>;
 	public loggedUser: any;
 

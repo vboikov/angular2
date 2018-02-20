@@ -39,7 +39,6 @@ export class AuthService {
 		return this._isAuthorized;
 	}
 
-	//TODO logic for get user from localstorage
 	get loggedUserInfo() {
 		return JSON.parse(localStorage.getItem(this.userKey));
 	}
@@ -50,10 +49,6 @@ export class AuthService {
 
 	get currentUser(): any {
 		return this.authenticated ? this.authState : null;
-	}
-
-	get currentUserId(): string {
-		return this.authenticated ? this.authState.uid : '';
 	}
 
 	googleLogin() {
@@ -72,22 +67,7 @@ export class AuthService {
 		.then((credential) => {
 			this.isAuthorized = true;
 			this.authState = credential.user;
-			this.updateUserData()
 		})
 		.catch(error => console.log(error));
 	}
-
-	private updateUserData(): void {
-		let path = `users/${this.currentUserId}`;
-		let data = {
-			email: this.authState.email,
-			name: this.authState.displayName
-		}
-
-		this.db.object(path).update(data)
-		.catch(error => console.log(error));
-
-	}
-
-
 }

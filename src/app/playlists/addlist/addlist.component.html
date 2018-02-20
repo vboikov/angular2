@@ -1,10 +1,6 @@
-<div class="progress">
-    <!--<div class="progressBar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>-->
-    <!--<div class="progressBarOrange" [ngStyle]="{ 'width': 100 - currentUpload?.progress + '%' }"></div>-->
-</div>
 <div class="playlistControl">
     <h2>Add songs</h2>
-    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd" >Add song</a>
+    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd">Add song</a>
 </div>
 <form #addPlaylistForm="ngForm" (ngSubmit)="onSubmit(title)">
     <div class="field">

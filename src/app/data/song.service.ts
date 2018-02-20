@@ -17,7 +17,6 @@ export class SongService {
 	constructor(private db: AngularFireDatabase) {
 	}
 
-
 	getSongs() {
 		this.items = <FirebaseListObservable<Song[]>>this.db.list('songs').map(data => {
 			this.amount = data.length;
@@ -26,15 +25,12 @@ export class SongService {
 		return this.items;
 	}
 
-
 	getSongById(id): any {
 		this.itemId = <FirebaseListObservable<Song>>this.db.list('songs', ref => ref.orderByChild('id').equalTo(id)).map(data => {
 			return data;
 		});
 		return this.itemId;
-
 	}
-
 
 	addSong(song: Song): void {
 		this.getSongs();
@@ -52,5 +48,4 @@ export class SongService {
 	deleteSong(i): void {
 		this.db.object('songs/' + i).remove();
 	}
-
 }

@@ -1,0 +1,27 @@
+<section *ngIf="playlist">
+    <form #editPlaylistForm="ngForm" (ngSubmit)="onSubmit(playlist)">
+        <div class="field">
+            <label for="title">Playlist title</label>
+            <input type="text" name="title" id="title" [(ngModel)]="playlist.title" #nameControl
+                   placeholder="Type a title" required>
+        </div>
+        <div class="field" *ngFor="let song of songs let i=index">
+            <div class="checkbox">
+                <input type="checkbox" (change)="onAddToPlaylist($event, song)" [checked]="isChecked(song.id)">
+            </div>
+            <div class="trigger">
+                <div (click)="onSongClick(song)">
+                    <div class="songInfo">
+                        <h4>{{song.singer}}</h4>
+                        <h5>{{song.title}}</h5>
+                    </div>
+                    <div class="songControls">
+                        <button><span class="play"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit">Update playlist</button>
+    </form>
+    <footer-shelf [selectedSong]="selectedSong" *ngIf="selectedSong"></footer-shelf>
+</section>

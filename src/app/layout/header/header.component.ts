@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 	user: Observable<firebase.User>;
 	public loggedUser: any;
 	public menuState: boolean = false;
@@ -22,8 +22,6 @@ export class HeaderComponent {
 	ngOnInit() {
 		this.loggedUser = this.authService.loggedUserInfo;
 	}
-
-
 
 	toogleMenu() {
 		this.menuState = !this.menuState;

@@ -35,13 +35,11 @@ span.stop:after {
     font-size: 24px;
 }
 
-
 span.prevSong:after {
     content: '\2190';
     line-height: 21px;
     font-size: 20px;
 }
-
 
 span.nextSong:after {
     content: '\2192';

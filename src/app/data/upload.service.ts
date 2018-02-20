@@ -16,7 +16,6 @@ export class UploadService {
 	private basePath: string = '/uploads';
 	private uploadTask: firebase.storage.UploadTask;
 	storage = firebase.storage();
-	starsRefAudio = this.storage.ref('uploads/carriage.mp3');
 
 	constructor(public http: Http, private af: AngularFireModule, private db: AngularFireDatabase) {
 	}
@@ -25,7 +24,6 @@ export class UploadService {
 		this.db.list(`${this.basePath}/`).push(upload);
 	};
 
-	// TODO save upload.url to SONG object
 	pushUpload(upload: Upload) {
 		let storageRef = this.storage.ref();
 		let urlName = upload.file.name;
@@ -46,16 +44,4 @@ export class UploadService {
 			}
 		);
 	}
-
-	// downloadAudio() {
-	// 	this.starsRefAudio.getDownloadURL().then(function (url) {
-	// 		let audioURL = url;
-	// 		console.log(audioURL);
-	// 		return audioURL;
-	// 	}).catch(function (error) {
-	// 		console.log(error);
-	// 	});
-	// }
-
-
 }

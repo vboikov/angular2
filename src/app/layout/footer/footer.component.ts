@@ -82,7 +82,4 @@ export class FooterComponent implements AfterViewInit, OnChanges {
 		}
 		this.takeUrl(this.playStatus);
 	}
-
-
-
 }

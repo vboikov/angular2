@@ -5,6 +5,7 @@ import {AuthService} from '../auth/auth.service';
 import {FooterComponent} from '../layout/footer/footer.component';
 import {PlaylistService} from '../data/playlist.service';
 import {Playlist} from '../data/playlist';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: 'app-playlists',
@@ -21,7 +22,7 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 	playlists: Playlist[];
 	choosePlaylist: Playlist;
 
-	constructor(private songService: SongService, private playlistService: PlaylistService) {
+	constructor(private songService: SongService, private playlistService: PlaylistService, private router: Router) {
 	};
 
 	ngOnInit() {
@@ -36,8 +37,8 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 	ngOnChanges() {
 		console.log(this.choosePlaylist);
 	}
-	
-	onListChange(event){
+
+	onListChange(event) {
 		this.songs = event.songs;
 		this.selectedSong = this.songs[0];
 
@@ -45,5 +46,9 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 
 	onSongClick(song: Song): void {
 		this.selectedSong = song;
+	}
+
+	edit(id: number) {
+		this.router.navigate(['musicshelf/playlists-edit/' + id]);
 	}
 }
