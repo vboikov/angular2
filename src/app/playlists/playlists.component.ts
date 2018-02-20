@@ -1,7 +1,6 @@
-import {Component, OnInit, Input, OnChanges, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, ViewChild} from '@angular/core';
 import {Song} from '../data/song';
 import {SongService} from '../data/song.service';
-import {AuthService} from '../auth/auth.service';
 import {FooterComponent} from '../layout/footer/footer.component';
 import {PlaylistService} from '../data/playlist.service';
 import {Playlist} from '../data/playlist';
@@ -23,14 +22,22 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 	choosePlaylist: Playlist;
 
 	constructor(private songService: SongService, private playlistService: PlaylistService, private router: Router) {
+		this.playlistService.getPlaylists().subscribe(playlists => {
+			if(playlists.length > 0){
+				this.choosePlaylist	= playlists[0];
+				this.songs = playlists[0].songs;
+				this.playlists =  playlists;
+			}
+			else {
+				this.router.navigate(['musicshelf/addlist/']);
+			}
+
+		})
 	};
 
 	ngOnInit() {
-		this.playlistService.getPlaylists().subscribe(playlists => {
-			this.playlists = playlists;
-			this.songs = this.playlists[0].songs;
-			this.choosePlaylist = playlists[0];
-		})
+
+
 
 	}
 

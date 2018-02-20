@@ -1,5 +1,5 @@
-import {Component, OnInit, Input, ViewChild, EventEmitter} from '@angular/core';
-import {FormsModule, NgForm, NgControl} from '@angular/forms'
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgForm, NgControl} from '@angular/forms'
 import {Router} from '@angular/router';
 import {SongService} from '../../data/song.service';
 import {Song} from '../../data/song';
@@ -30,13 +30,19 @@ export class AddListComponent implements OnInit {
 	playStatus: boolean = false;
 
 	constructor(private router: Router, private songService: SongService, private playlistService: PlaylistService) {
+		this.songService.getSongs().subscribe(songs => {
+			if(songs.length > 0) {
+				this.songs = songs;
+			}
+			else{
+				this.router.navigate(['musicshelf/addsong']);
+			}
+		});
 	};
 
 
 	ngOnInit() {
-		this.songService.getSongs().subscribe(songs => {
-			this.songs = songs;
-		});
+
 		this.formControlDir.form.valueChanges.subscribe(value => {
 			this.formValue = value;
 

@@ -22,7 +22,7 @@ export class AddSongComponent implements OnInit {
 	song: Song;
 	formValue: any;
 	nameValue: string;
-	selectedFiles: FileList;
+	selectedFile: File;
 	currentUpload: Upload;
 
 	constructor(private router: Router,
@@ -57,12 +57,16 @@ export class AddSongComponent implements OnInit {
 	}
 
 	detectFiles(event) {
-		this.selectedFiles = event.target.files;
+		if(event.target.files[0].type === "audio/mp3"){
+			this.selectedFile = event.target.files[0];
+		}
+		else{
+			alert('Only .mp3');
+		}
 	}
 
 	uploadSingle() {
-		let file = this.selectedFiles.item(0);
-		this.currentUpload = new Upload(file);
+		this.currentUpload = new Upload(this.selectedFile);
 		this.uplService.pushUpload(this.currentUpload);
 	}
 }

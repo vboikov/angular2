@@ -1,15 +1,13 @@
-import {Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild, OnChanges} from '@angular/core';
+import {Component, ElementRef, Input, AfterViewInit, ViewChild, OnChanges, OnDestroy} from '@angular/core';
 import * as firebase from 'firebase/app';
-import {Router} from '@angular/router';
 import {Song} from '../../data/song';
-import {SongService} from '../../data/song.service';
 
 @Component({
 	selector: 'footer-shelf',
 	templateUrl: './footer.component.html',
 	styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements AfterViewInit, OnChanges {
+export class FooterComponent implements AfterViewInit, OnChanges, OnDestroy {
 	@ViewChild('trackTime') trackTime: ElementRef;
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
@@ -28,6 +26,10 @@ export class FooterComponent implements AfterViewInit, OnChanges {
 		if (this.playStatus) {
 			this.takeUrl(this.playStatus);
 		}
+	}
+	ngOnDestroy(){
+		this.playStatus = false;
+		this.takeUrl(this.playStatus);
 	}
 
 	ngAfterViewInit() {
