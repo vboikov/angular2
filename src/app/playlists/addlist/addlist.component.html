@@ -1,7 +1,3 @@
-<div class="playlistControl" *ngIf="!songs">
-    <h2>Add songs</h2>
-    <a [routerLink]="['../addsong']" routerLinkActive="active" class="btnAdd">Add song</a>
-</div>
 <form #addPlaylistForm="ngForm" (ngSubmit)="onSubmit(title)">
     <div class="field">
         <label for="title">Playlist title</label>

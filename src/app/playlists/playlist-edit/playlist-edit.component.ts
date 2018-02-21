@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Song} from '../../data/song';
 import {SongService} from '../../data/song.service';
 import {PlaylistService} from '../../data/playlist.service';
@@ -8,6 +8,7 @@ import 'rxjs/add/operator/switchMap';
 import {NgControl, NgForm} from '@angular/forms';
 import {FooterComponent} from '../../layout/footer/footer.component';
 import * as _ from 'underscore';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-playlists-edit',
@@ -15,7 +16,7 @@ import * as _ from 'underscore';
 	styleUrls: ['./playlist-edit.component.css']
 })
 
-export class PlaylistEditComponent implements OnInit {
+export class PlaylistEditComponent implements OnInit, OnDestroy {
 
 	@ViewChild(FooterComponent) footer;
 	@ViewChild('editPlaylistForm') formControlDir: NgForm;
@@ -23,6 +24,7 @@ export class PlaylistEditComponent implements OnInit {
 
 	formValue: any;
 	nameValue: string;
+	sub: Subscription;
 	playlist: Playlist;
 	songs: Song[];
 	selectedSong: Song;
@@ -34,7 +36,7 @@ export class PlaylistEditComponent implements OnInit {
 	};
 
 	ngOnInit() {
-		this.songService.getSongs().subscribe(songs => {
+		this.sub = this.songService.getSongs().subscribe(songs => {
 			this.songs = songs;
 		});
 	}
@@ -69,5 +71,9 @@ export class PlaylistEditComponent implements OnInit {
 		else {
 			alert('Please fill all fields');
 		}
+	}
+
+	ngOnDestroy(){
+		this.sub.unsubscribe();
 	}
 }

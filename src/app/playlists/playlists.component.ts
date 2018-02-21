@@ -1,10 +1,12 @@
-import {Component, OnInit, Input, OnChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, ViewChild, OnChanges} from '@angular/core';
 import {Song} from '../data/song';
 import {SongService} from '../data/song.service';
 import {FooterComponent} from '../layout/footer/footer.component';
 import {PlaylistService} from '../data/playlist.service';
 import {Playlist} from '../data/playlist';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 @Component({
 	selector: 'app-playlists',
@@ -13,36 +15,35 @@ import {Router} from '@angular/router';
 })
 
 
-export class PlaylistsComponent implements OnInit, OnChanges {
+export class PlaylistsComponent implements OnInit, OnDestroy {
 	@Input() data: Song;
 	@ViewChild(FooterComponent) footer;
+	sub: Subscription;
 	songs: Song[];
 	selectedSong: Song;
 	playlists: Playlist[];
 	choosePlaylist: Playlist;
 
-	constructor(private songService: SongService, private playlistService: PlaylistService, private router: Router) {
-		this.playlistService.getPlaylists().subscribe(playlists => {
-			if(playlists.length > 0){
-				this.choosePlaylist	= playlists[0];
-				this.songs = playlists[0].songs;
-				this.playlists =  playlists;
-			}
-			else {
-				this.router.navigate(['musicshelf/addlist/']);
-			}
+	constructor(private db: AngularFireDatabase, private songService: SongService, private playlistService: PlaylistService, private router: Router) {
 
-		})
 	};
 
 	ngOnInit() {
-
-
-
-	}
-
-	ngOnChanges() {
-		console.log(this.choosePlaylist);
+		this.db.database.ref('playlists').on('value',
+			(data) => {
+				if (data.val() === null) {
+					this.router.navigate(['musicshelf/addlist/']);
+				}
+			}, (err) => {
+				console.log('Error', err.val());
+			});
+		this.sub = this.playlistService.getPlaylists().subscribe(playlists => {
+			if (playlists.length > 0) {
+				this.choosePlaylist = playlists[0];
+				this.songs = playlists[0].songs;
+				this.playlists = playlists;
+			}
+		})
 	}
 
 	onListChange(event) {
@@ -57,5 +58,9 @@ export class PlaylistsComponent implements OnInit, OnChanges {
 
 	edit(id: number) {
 		this.router.navigate(['musicshelf/playlists-edit/' + id]);
+	}
+
+	ngOnDestroy() {
+		this.sub.unsubscribe();
 	}
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {NgForm, NgControl} from '@angular/forms'
 import {Router} from '@angular/router';
 import {SongService} from '../../data/song.service';
@@ -6,6 +6,8 @@ import {Song} from '../../data/song';
 import {FooterComponent} from '../../layout/footer/footer.component';
 import {Playlist} from '../../data/playlist';
 import {PlaylistService} from '../../data/playlist.service';
+import {Subscription} from 'rxjs/Subscription';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 
 @Component({
@@ -15,11 +17,12 @@ import {PlaylistService} from '../../data/playlist.service';
 })
 
 
-export class AddListComponent implements OnInit {
+export class AddListComponent implements OnInit, OnDestroy {
 	@ViewChild(FooterComponent) footer;
 	@ViewChild('addPlaylistForm') formControlDir: NgForm;
 	@ViewChild('nameControl', {read: NgControl}) nameControlDir: NgControl;
 
+	sub: Subscription;
 	formValue: any;
 	nameValue: string;
 	playlists: Playlist[];
@@ -29,20 +32,25 @@ export class AddListComponent implements OnInit {
 	selectedSong: Song;
 	playStatus: boolean = false;
 
-	constructor(private router: Router, private songService: SongService, private playlistService: PlaylistService) {
-		this.songService.getSongs().subscribe(songs => {
-			if(songs.length > 0) {
-				this.songs = songs;
-			}
-			else{
-				this.router.navigate(['musicshelf/addsong']);
-			}
-		});
+	constructor(private db: AngularFireDatabase ,private router: Router, private songService: SongService, private playlistService: PlaylistService) {
+
 	};
 
 
 	ngOnInit() {
-
+		this.db.database.ref('songs').on('value',
+			(data) => {
+				if (data.val() === null) {
+					this.router.navigate(['musicshelf/addsong']);
+				}
+			}, (err) => {
+				console.log('Error', err.val());
+			});
+		this.sub = this.songService.getSongs().subscribe(songs => {
+			if(songs.length > 0) {
+				this.songs = songs;
+			}
+		});
 		this.formControlDir.form.valueChanges.subscribe(value => {
 			this.formValue = value;
 
@@ -73,11 +81,15 @@ export class AddListComponent implements OnInit {
 	onSubmit(title) {
 		if (title && this.playlistSongs.length) {
 			this.playlistService.addPlaylist(title, this.playlistSongs);
-			this.router.navigate(['playlists']);
+			this.router.navigate(['musicshelf/playlists']);
 		}
 		else {
 			alert('Please fill all fields');
 		}
+	}
+
+	ngOnDestroy() {
+		this.sub.unsubscribe();
 	}
 
 }
