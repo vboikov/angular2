@@ -2,11 +2,11 @@ import {Component, ViewChild} from '@angular/core';
 import {HeaderComponent} from '../layout/header/header.component';
 
 @Component({
-	selector: 'auth',
+	selector: 'app-dashboard',
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent{
+export class DashboardComponent {
 	public menuState: boolean;
 	@ViewChild(HeaderComponent) child;
 

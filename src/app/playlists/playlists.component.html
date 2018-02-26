@@ -7,4 +7,4 @@
     <button [routerLink]="['../addlist']">Add playlist</button>
 </div>
 <app-playlist-item *ngIf="playlists" [data]="songs" (selectedSong)="onSongClick($event)"></app-playlist-item>
-<footer-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></footer-shelf>
+<app-footer-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></app-footer-shelf>

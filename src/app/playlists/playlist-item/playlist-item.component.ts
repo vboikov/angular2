@@ -11,7 +11,7 @@ import {SongService} from '../../data/song.service';
 export class PlaylistItemComponent {
 	@Input() data: Song[];
 	@Output() selectedSong: EventEmitter<Song> = new EventEmitter<Song>();
-	playStatus: boolean = false;
+	public playStatus = false;
 
 	constructor(private router: Router,
 	            private route: ActivatedRoute,

@@ -1,10 +1,11 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, OnDestroy} from '@angular/core';
 import {Song} from '../data/song';
 import {SongService} from '../data/song.service';
-import {NgForm, NgControl} from '@angular/forms'
+import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Upload} from '../data/upload';
 import {UploadService} from '../data/upload.service';
+import {Subscription} from 'rxjs/Subscription';
 
 
 @Component({
@@ -14,14 +15,13 @@ import {UploadService} from '../data/upload.service';
 })
 
 
-export class AddSongComponent implements OnInit {
+export class AddSongComponent implements OnInit, OnDestroy {
 	@Input() data: Song[];
 	@ViewChild('addSongForm') formControlDir: NgForm;
-	@ViewChild('nameControl', {read: NgControl}) nameControlDir: NgControl;
 
+	sub: Subscription;
 	song: Song;
 	formValue: any;
-	nameValue: string;
 	selectedFile: File;
 	currentUpload: Upload;
 
@@ -32,11 +32,8 @@ export class AddSongComponent implements OnInit {
 
 
 	ngOnInit() {
-		this.formControlDir.form.valueChanges.subscribe(value => {
+		this.sub = this.formControlDir.form.valueChanges.subscribe(value => {
 			this.formValue = value;
-		});
-		this.nameControlDir.control.valueChanges.subscribe(value => {
-			this.nameValue = value;
 		});
 	}
 
@@ -44,8 +41,7 @@ export class AddSongComponent implements OnInit {
 		if (this.validate(obj)) {
 			this.songService.addSong(obj);
 			this.uploadSingle();
-		}
-		else {
+		} else {
 			alert('Please fill all fields');
 		}
 	}
@@ -57,10 +53,9 @@ export class AddSongComponent implements OnInit {
 	}
 
 	detectFiles(event) {
-		if(event.target.files[0].type === "audio/mp3"){
+		if (event.target.files[0].type === 'audio/mp3') {
 			this.selectedFile = event.target.files[0];
-		}
-		else{
+		} else {
 			alert('Only .mp3');
 		}
 	}
@@ -68,5 +63,9 @@ export class AddSongComponent implements OnInit {
 	uploadSingle() {
 		this.currentUpload = new Upload(this.selectedFile);
 		this.uplService.pushUpload(this.currentUpload);
+	}
+
+	ngOnDestroy() {
+		this.sub.unsubscribe();
 	}
 }

@@ -4,7 +4,6 @@ import * as firebase from 'firebase';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabase} from 'angularfire2/database';
@@ -13,11 +12,10 @@ import {Upload} from './upload';
 
 @Injectable()
 export class UploadService {
-	private basePath: string = '/uploads';
-	private uploadTask: firebase.storage.UploadTask;
-	storage = firebase.storage();
+	private basePath = '/uploads';
+	private storage = firebase.storage();
 
-	constructor(public http: Http, private af: AngularFireModule, private db: AngularFireDatabase) {
+	constructor(private af: AngularFireModule, private db: AngularFireDatabase) {
 	}
 
 	private saveFileData(upload: Upload) {
@@ -25,9 +23,9 @@ export class UploadService {
 	};
 
 	pushUpload(upload: Upload) {
-		let storageRef = this.storage.ref();
-		let urlName = upload.file.name;
-		let uploadTask = storageRef.child(`${this.basePath}/${urlName}`).put(upload.file);
+		const storageRef = this.storage.ref();
+		const urlName = upload.file.name;
+		const uploadTask = storageRef.child(`${this.basePath}/${urlName}`).put(upload.file);
 
 		uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
 			function () {
@@ -35,12 +33,12 @@ export class UploadService {
 				upload.url = uploadTask.snapshot.downloadURL;
 			},
 			(error) => {
-				console.log('ERROR', error)
+				console.log('ERROR', error);
 			},
 			() => {
 				upload.url = uploadTask.snapshot.downloadURL;
 				upload.name = upload.file.name;
-				this.saveFileData(upload)
+				this.saveFileData(upload);
 			}
 		);
 	}

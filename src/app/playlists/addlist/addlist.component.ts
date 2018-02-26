@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {NgForm, NgControl} from '@angular/forms'
+import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {SongService} from '../../data/song.service';
 import {Song} from '../../data/song';
@@ -20,20 +20,20 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class AddListComponent implements OnInit, OnDestroy {
 	@ViewChild(FooterComponent) footer;
 	@ViewChild('addPlaylistForm') formControlDir: NgForm;
-	@ViewChild('nameControl', {read: NgControl}) nameControlDir: NgControl;
 
-	sub: Subscription;
-	formValue: any;
-	nameValue: string;
-	playlists: Playlist[];
-	playlist: Playlist;
-	songs: Song[];
-	playlistSongs: Song[] = [];
-	selectedSong: Song;
-	playStatus: boolean = false;
+	private sub: Subscription;
+	private formValue: any;
+	public playlists: Playlist[];
+	public playlist: Playlist;
+	public songs: Song[];
+	public playlistSongs: Song[] = [];
+	public selectedSong: Song;
+	public playStatus = false;
 
-	constructor(private db: AngularFireDatabase ,private router: Router, private songService: SongService, private playlistService: PlaylistService) {
-
+	constructor(private db: AngularFireDatabase,
+	            private router: Router,
+	            private songService: SongService,
+	            private playlistService: PlaylistService) {
 	};
 
 
@@ -47,7 +47,7 @@ export class AddListComponent implements OnInit, OnDestroy {
 				console.log('Error', err.val());
 			});
 		this.sub = this.songService.getSongs().subscribe(songs => {
-			if(songs.length > 0) {
+			if (songs.length > 0) {
 				this.songs = songs;
 			}
 		});
@@ -55,16 +55,12 @@ export class AddListComponent implements OnInit, OnDestroy {
 			this.formValue = value;
 
 		});
-		this.nameControlDir.control.valueChanges.subscribe(value => {
-			this.nameValue = value;
-		});
 	}
 
 	onAddToPlaylist(e, song: Song) {
 		if (e.target.checked) {
 			this.playlistSongs.push(song);
-		}
-		else {
+		} else {
 			this.playlistSongs.forEach((item, index) => {
 				if (item === song) {
 					this.playlistSongs.splice(index, 1);
@@ -82,8 +78,7 @@ export class AddListComponent implements OnInit, OnDestroy {
 		if (title && this.playlistSongs.length) {
 			this.playlistService.addPlaylist(title, this.playlistSongs);
 			this.router.navigate(['musicshelf/playlists']);
-		}
-		else {
+		} else {
 			alert('Please fill all fields');
 		}
 	}

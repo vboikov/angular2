@@ -6,15 +6,14 @@ import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
 
 @Component({
-	selector: 'auth',
+	selector: 'app-auth',
 	templateUrl: './auth.component.html',
 	styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit{
-	user: Observable<firebase.User>;
+export class AuthComponent implements OnInit {
 	public loggedUser: any;
 
-	constructor(public afAuth: AngularFireAuth, public authService: AuthService, public router: Router) {
+	constructor(public authService: AuthService, public router: Router) {
 	}
 
 	ngOnInit() {

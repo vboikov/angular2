@@ -13,14 +13,14 @@ export class AuthService {
 	public isAuthorized$: Observable<boolean>;
 	private _isAuthorizedSubject: Subject<boolean>;
 	private _isAuthorized: boolean;
-	authState: any = null;
-	public userKey: string = 'firebase:authUser:AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg:[DEFAULT]';
+	public authState: any = null;
+	public userKey = 'firebase:authUser:AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg:[DEFAULT]';
 
 	constructor(private afAuth: AngularFireAuth,
 	            private db: AngularFireDatabase,
 	            private router: Router) {
 		this.afAuth.authState.subscribe((auth) => {
-			this.authState = auth
+			this.authState = auth;
 		});
 		this._isAuthorizedSubject = new Subject<boolean>();
 		this.isAuthorized$ = this._isAuthorizedSubject.asObservable();

@@ -3,7 +3,7 @@ import * as firebase from 'firebase/app';
 import {Song} from '../../data/song';
 
 @Component({
-	selector: 'footer-shelf',
+	selector: 'app-footer-shelf',
 	templateUrl: './footer.component.html',
 	styleUrls: ['./footer.component.css']
 })
@@ -12,11 +12,11 @@ export class FooterComponent implements AfterViewInit, OnChanges, OnDestroy {
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
 
-	song: Song;
-	storage = firebase.storage();
-	starsRefAudio: any;
-	playStatus: boolean = false;
-	audio: HTMLAudioElement;
+	public song: Song;
+	private storage = firebase.storage();
+	private starsRefAudio: any;
+	public playStatus = false;
+	public audio: HTMLAudioElement;
 
 	constructor() {
 		this.audio = new Audio();
@@ -27,7 +27,7 @@ export class FooterComponent implements AfterViewInit, OnChanges, OnDestroy {
 			this.takeUrl(this.playStatus);
 		}
 	}
-	ngOnDestroy(){
+	ngOnDestroy() {
 		this.playStatus = false;
 		this.takeUrl(this.playStatus);
 	}
@@ -38,43 +38,42 @@ export class FooterComponent implements AfterViewInit, OnChanges, OnDestroy {
 
 	takeUrl(status: boolean) {
 		this.playStatus = !status;
-		let trackTime = this.trackTime.nativeElement;
+		const trackTime = this.trackTime.nativeElement;
 		this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
 		if (!this.playStatus) {
 			this.starsRefAudio.getDownloadURL().then(data => {
-				let track = this.audio;
+				const track = this.audio;
 				track.pause();
 				track.src = data;
 				track.play();
 				this.playStatus = !this.playStatus;
 				trackTime.addEventListener('click', function (e) {
-					let timeStamp = e.offsetX / trackTime.offsetWidth;
+					const timeStamp = e.offsetX / trackTime.offsetWidth;
 					track.currentTime = track.duration * timeStamp;
 				}, true);
 			}, err => {
 				console.log(err);
 			});
-		}
-		else {
+		} else {
 			this.audio.pause();
 			this.playStatus = !this.playStatus;
 		}
 	}
 
 	changeSong(state: boolean) {
-		let amount = this.songs.length - 1;
-		let indexOfSong = this.songs.indexOf(this.selectedSong);
+		let step;
+		const amount = this.songs.length - 1;
+		const indexOfSong = this.songs.indexOf(this.selectedSong);
 		if (state) {
-			let step = indexOfSong + 1;
+			step = indexOfSong + 1;
 			if (indexOfSong === amount) {
 				this.selectedSong = this.songs[0];
 			}
 			if (indexOfSong !== amount) {
 				this.selectedSong = this.songs[step];
 			}
-		}
-		if (!state) {
-			let step = indexOfSong - 1;
+		} else {
+			step = indexOfSong - 1;
 			if (indexOfSong === 0) {
 				this.selectedSong = this.songs[amount];
 			}

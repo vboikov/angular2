@@ -10,7 +10,7 @@ import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} f
 
 @Injectable()
 export class SongService {
-	private amount: number = 0;
+	private amount = 0;
 	public itemId: any;
 	private items: FirebaseListObservable<Song[]>;
 

@@ -18,13 +18,16 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class PlaylistsComponent implements OnInit, OnDestroy {
 	@Input() data: Song;
 	@ViewChild(FooterComponent) footer;
-	sub: Subscription;
-	songs: Song[];
-	selectedSong: Song;
-	playlists: Playlist[];
-	choosePlaylist: Playlist;
+	private sub: Subscription;
+	public songs: Song[];
+	public selectedSong: Song;
+	public playlists: Playlist[];
+	public choosePlaylist: Playlist;
 
-	constructor(private db: AngularFireDatabase, private songService: SongService, private playlistService: PlaylistService, private router: Router) {
+	constructor(private db: AngularFireDatabase,
+	            private songService: SongService,
+	            private playlistService: PlaylistService,
+	            private router: Router) {
 
 	};
 
@@ -43,7 +46,7 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 				this.songs = playlists[0].songs;
 				this.playlists = playlists;
 			}
-		})
+		});
 	}
 
 	onListChange(event) {

@@ -11,7 +11,7 @@ import {Song} from './song';
 
 @Injectable()
 export class PlaylistService {
-	private amount: number = 0;
+	private amount = 0;
 	public itemId: any;
 	private items: FirebaseListObservable<Playlist[]>;
 
@@ -47,7 +47,7 @@ export class PlaylistService {
 	}
 
 	updatePlaylist(playlist): void {
-		let path = 'playlists/'+ playlist.$key;
+		const path = 'playlists/' + playlist.$key;
 		this.db.object(path).update(playlist)
 		.catch(error => console.log(error));
 	}

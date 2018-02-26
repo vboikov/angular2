@@ -62,9 +62,6 @@ span.nextSong:after {
     float: left;
     max-width: 100%;
     outline: none;
-    -moz-transition: .2s;
-    -ms-transition: .2s;
-    transition: .2s;
 }
 
 .controls {

@@ -10,11 +10,11 @@
         </label>
     </div>
     <div class="field hidden" *ngIf="selectedFile">
-        <input type="text" name="url" [(ngModel)]="selectedFile.name" id="url" ngModel>
+        <input type="text" name="url" [(ngModel)]="selectedFile.name" id="url">
     </div>
     <div class="field">
         <label for="title">Song title</label>
-        <input type="text" name="title" id="title" [(ngModel)]="title" #nameControl placeholder="Type a title" required>
+        <input type="text" name="title" id="title" ngModel placeholder="Type a title" required>
     </div>
     <div class="field">
         <label for="singer">Singer</label>

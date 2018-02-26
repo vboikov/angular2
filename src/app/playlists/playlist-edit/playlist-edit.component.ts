@@ -22,17 +22,19 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	@ViewChild('editPlaylistForm') formControlDir: NgForm;
 	@ViewChild('nameControl', {read: NgControl}) nameControlDir: NgControl;
 
-	formValue: any;
-	nameValue: string;
-	sub: Subscription;
-	playlist: Playlist;
-	songs: Song[];
-	selectedSong: Song;
-	playStatus: boolean = false;
-	playlists: Playlist[];
+	private formValue: any;
+	private sub: Subscription;
+	public playlist: Playlist;
+	public songs: Song[];
+	public selectedSong: Song;
+	public playStatus = false;
+	public playlists: Playlist[];
 
-	constructor(private songService: SongService, private playlistService: PlaylistService, private router: Router, private route: ActivatedRoute,) {
-		route.data.subscribe(data => this.playlist = data['playlist'])
+	constructor(private songService: SongService,
+	            private playlistService: PlaylistService,
+	            private router: Router,
+	            private route: ActivatedRoute) {
+		route.data.subscribe(data => this.playlist = data['playlist']);
 	};
 
 	ngOnInit() {
@@ -55,8 +57,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	onAddToPlaylist(e, song: Song) {
 		if (e.target.checked) {
 			this.playlist.songs.push(song);
-		}
-		else {
+		} else {
 			this.playlist.songs = _.reject(this.playlist.songs, (songSplice) => {
 				return songSplice.id === song.id;
 			});
@@ -67,13 +68,12 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 		if (playlist.title && this.playlist.songs.length) {
 			this.playlistService.updatePlaylist(playlist);
 			this.router.navigate(['musicshelf/playlists']);
-		}
-		else {
+		} else {
 			alert('Please fill all fields');
 		}
 	}
 
-	ngOnDestroy(){
+	ngOnDestroy() {
 		this.sub.unsubscribe();
 	}
 }
