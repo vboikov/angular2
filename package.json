@@ -28,11 +28,12 @@
     "rxjs": "5.4.3",
     "systemjs": "0.19.47",
     "ts-helpers": "1.1.1",
+    "typescript": "2.2.0",
     "underscore": "^1.8.3",
     "zone.js": "0.8.5"
   },
   "devDependencies": {
-    "@angular/cli": "^1.6.3",
+    "@angular/cli": "^1.7.1",
     "@angular/compiler-cli": "2.4.10",
     "@types/jasmine": "2.5.38",
     "@types/node": "6.0.60",
@@ -47,7 +48,7 @@
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "4.5.0",
-    "typescript": "2.4.2",
+    "typescript": "2.2.0",
     "webpack": "3.10.0"
   }
 }

@@ -5,13 +5,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {Song} from './song';
 
-import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 
 @Injectable()
 export class SongService {
 	private amount = 0;
-	public itemId: any;
 	private items: FirebaseListObservable<Song[]>;
 
 	constructor(private db: AngularFireDatabase) {
@@ -23,13 +22,6 @@ export class SongService {
 			return data;
 		});
 		return this.items;
-	}
-
-	getSongById(id): any {
-		this.itemId = <FirebaseListObservable<Song>>this.db.list('songs', ref => ref.orderByChild('id').equalTo(id)).map(data => {
-			return data;
-		});
-		return this.itemId;
 	}
 
 	addSong(song: Song): void {

@@ -19,11 +19,10 @@ export class AddSongComponent implements OnInit, OnDestroy {
 	@Input() data: Song[];
 	@ViewChild('addSongForm') formControlDir: NgForm;
 
-	sub: Subscription;
-	song: Song;
-	formValue: any;
-	selectedFile: File;
-	currentUpload: Upload;
+	private sub: Subscription;
+	public formValue: any;
+	public selectedFile: File;
+	public currentUpload: Upload;
 
 	constructor(private router: Router,
 	            private songService: SongService,
@@ -38,17 +37,11 @@ export class AddSongComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit(obj) {
-		if (this.validate(obj)) {
+		if (obj.title && obj.singer && obj.album && obj.infoSong) {
 			this.songService.addSong(obj);
 			this.uploadSingle();
 		} else {
 			alert('Please fill all fields');
-		}
-	}
-
-	validate(obj) {
-		if (obj.title && obj.singer && obj.album && obj.infoSong) {
-			return true;
 		}
 	}
 
