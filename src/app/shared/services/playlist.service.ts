@@ -5,8 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import {Playlist} from './playlist';
-import {Song} from './song';
+import {Playlist} from '../../data/playlist';
+import {Song} from '../../data/song';
 
 
 @Injectable()

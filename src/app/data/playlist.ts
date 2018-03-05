@@ -1,6 +1,6 @@
 import {Song} from './song';
-export class Playlist {
+export interface Playlist {
 	id: number;
-	constructor(public title: string,
-	            public songs: Song[]) {}
+	title: string;
+	songs: Song[];
 }

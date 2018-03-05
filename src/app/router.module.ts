@@ -4,16 +4,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {AddSongComponent} from './addSong/add-song.component'
 import {PlaylistsComponent} from './playlists/playlists.component';
-import {PlaylistResolver} from './data/playlist.resolver';
+import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
 import {AuthComponent} from './auth/auth.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {NavComponent} from './layout/nav/nav.component';
-import {FooterComponent} from './layout/footer/footer.component';
+import {PlayerComponent} from './layout/player/player.component';
 import {AuthorizedGuard} from './shared/guards/authorized.guard';
 import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
 import {UploadComponent} from './layout/upload/upload.component';
-import {AddListComponent} from './playlists/addlist/addlist.component';
+import {PlaylistAddComponent} from './playlists/playlist-add/playlist-add.component';
 import {PlaylistItemComponent} from './playlists/playlist-item/playlist-item.component';
 import {PlaylistEditComponent} from './playlists/playlist-edit/playlist-edit.component';
 
@@ -35,7 +35,7 @@ export const routes: Routes = [
 		children: [
 			{path: 'addsong', component: AddSongComponent, canActivate: [AuthorizedGuard]},
 			{path: 'playlists', component: PlaylistsComponent, canActivate: [AuthorizedGuard]},
-			{path: 'addlist', component: AddListComponent, canActivate: [AuthorizedGuard]},
+			{path: 'playlist-add', component: PlaylistAddComponent, canActivate: [AuthorizedGuard]},
 			{
 				path: 'playlists-edit/:id',
 				component: PlaylistEditComponent,
@@ -69,9 +69,9 @@ export const routedComponents = [
 	DashboardComponent,
 	HeaderComponent,
 	NavComponent,
-	FooterComponent,
+	PlayerComponent,
 	UploadComponent,
-	AddListComponent,
+	PlaylistAddComponent,
 	PlaylistItemComponent,
 	PlaylistEditComponent
 ];

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Upload} from '../../data/upload';
-import {UploadService} from '../../data/upload.service';
+import {UploadService} from '../../shared/services/upload.service';
 
 @Component({
 	selector: 'app-upload-shelf',

@@ -3,20 +3,19 @@
     height: 15px;
 }
 
-.progressBar {
-    background: #6f4c90;
+.progress-bar, .progress-bar {
     height: 15px;
     width: 0;
     display: block;
     float: left;
 }
 
-.progressBarOrange {
+.progress-bar {
+    background: #6f4c90;
+}
+
+.progress-bar-orange {
     background: #dc7001;
-    height: 15px;
-    width: 0;
-    display: block;
-    float: left;
 }
 
 form {
@@ -79,12 +78,12 @@ form textarea {
     opacity: 0;
 }
 
-.uploadWrap {
+.upload-wrap {
     position: relative;
     background: #6f4c90;
 }
 
-.uploadWrap:after {
+.upload-wrap:after {
     position: absolute;
     width: 30px;
     height: 30px;
@@ -103,14 +102,14 @@ form textarea {
     opacity: 0;
 }
 
-.uploadWrap span {
+.upload-wrap span {
     position: absolute;
     left: 55px;
     top: 15px;
     color: #fff;
 }
 
-.uploadWrap.detected:after {
+.upload-wrap.detected:after {
     content: '\2714';
 }
 

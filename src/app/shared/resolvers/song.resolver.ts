@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {SongService} from './song.service';
+import {SongService} from '../services/song.service';
 import {AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
 import 'rxjs/add/operator/map';

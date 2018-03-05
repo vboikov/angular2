@@ -1,6 +1,6 @@
 header {
     width: 100%;
-    height: 8vh;
+    height: 78px;
     background: #6f4c90;
     padding: 0 15px 0 15px;
     -webkit-box-shadow: 0px 4px 5px 0px rgba(255, 255, 255, 1);
@@ -8,9 +8,12 @@ header {
     box-shadow: 0px 4px 5px 0px rgba(255, 255, 255, 1);
 }
 
-.logo {
+.logo, .greeting{
     display: block;
     float: left;
+}
+
+.logo {
     border-radius: 50%;
     text-align: center;
     width: 30px;
@@ -18,47 +21,15 @@ header {
     height: 30px;
     background: #fff;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 22px;
 }
 
 .logo img {
     display: inline-block;
 }
 
-.greeting {
-    display: block;
-    float: left;
-}
-
 .greeting h4 {
-    line-height: 8vh;
+    line-height: 78px;
     padding-left: 20px;
     color: #fff;
-}
-
-.logButtons {
-    float: right;
-    height: 8vh;
-    line-height: 8vh;
-}
-
-.logButtons button {
-    background: none;
-    color: #fff;
-    border: 2px solid #fff;
-    padding: 5px;
-    cursor: pointer;
-}
-
-@media (max-width: 500px) {
-    .logo {
-        margin-top: 12px;
-    }
-
-    .greeting h4 {
-        line-height: 8vh;
-        padding-left: 20px;
-        color: #fff;
-        font-size: 12px;
-    }
 }

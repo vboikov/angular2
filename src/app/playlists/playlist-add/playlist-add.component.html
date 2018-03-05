@@ -7,18 +7,8 @@
         <div class="checkbox">
             <input type="checkbox" (change)="onAddToPlaylist($event, song)">
         </div>
-        <div class="trigger">
-            <div (click)="onSongClick(song)">
-                <div class="songInfo">
-                    <h4>{{song.singer}}</h4>
-                    <h5>{{song.title}}</h5>
-                </div>
-                <div class="songControls">
-                    <button><span class="play"></span></button>
-                </div>
-            </div>
-        </div>
+        <app-playlist-item [data]="song" (click)="onSongClick(song)"></app-playlist-item>
     </div>
     <button type="submit">Add playlist</button>
 </form>
-<app-footer-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></app-footer-shelf>
+<app-player-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></app-player-shelf>

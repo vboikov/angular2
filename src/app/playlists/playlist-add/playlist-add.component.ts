@@ -1,26 +1,21 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {SongService} from '../../data/song.service';
+import {SongService} from '../../shared/services/song.service';
 import {Song} from '../../data/song';
-import {FooterComponent} from '../../layout/footer/footer.component';
 import {Playlist} from '../../data/playlist';
-import {PlaylistService} from '../../data/playlist.service';
+import {PlaylistService} from '../../shared/services/playlist.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireDatabase} from 'angularfire2/database';
 
-
 @Component({
 	selector: 'app-add-playlist',
-	templateUrl: './addlist.component.html',
-	styleUrls: ['./addlist.component.css']
+	templateUrl: './playlist-add.component.html',
+	styleUrls: ['./playlist-add.component.css']
 })
 
-
-export class AddListComponent implements OnInit, OnDestroy {
-	@ViewChild(FooterComponent) footer;
+export class PlaylistAddComponent implements OnInit, OnDestroy {
 	@ViewChild('addPlaylistForm') formControlDir: NgForm;
-
 	private sub: Subscription;
 	private formValue: any;
 	public playlists: Playlist[];
@@ -35,7 +30,6 @@ export class AddListComponent implements OnInit, OnDestroy {
 	            private songService: SongService,
 	            private playlistService: PlaylistService) {
 	};
-
 
 	ngOnInit() {
 		this.db.database.ref('songs').on('value',
@@ -86,5 +80,4 @@ export class AddListComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.sub.unsubscribe();
 	}
-
 }

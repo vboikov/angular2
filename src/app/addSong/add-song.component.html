@@ -1,9 +1,9 @@
 <div class="progress">
-    <div class="progressBar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
-    <div class="progressBarOrange" [ngStyle]="{ 'width': 100 - currentUpload?.progress + '%' }"></div>
+    <div class="progress-bar" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+    <div class="progress-bar-orange" [ngStyle]="{ 'width': 100 - currentUpload?.progress + '%' }"></div>
 </div>
 <form #addSongForm="ngForm" (ngSubmit)="onSubmit(formValue)">
-    <div class="field uploadWrap" [ngClass]="selectedFile ? 'detected' : 'empty'">
+    <div class="field upload-wrap" [ngClass]="selectedFile ? 'detected' : 'empty'">
         <label for="upload">
             <input type="file" id="upload" (change)="detectFiles($event)">
             <span *ngIf="!selectedFile">No file</span><span *ngIf="selectedFile">File {{selectedFile.name}} detected</span>

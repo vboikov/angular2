@@ -1,4 +1,3 @@
-
 nav {
     width: 10%;
     min-width: 120px;
@@ -17,11 +16,11 @@ nav li {
     position: relative;
 }
 
-nav ul li:after {
+nav ul li:after, nav ul li:before {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 11vw;
+    width: 100%;
     min-width: 120px;
     height: 1px;
     background: #fff;
@@ -29,23 +28,7 @@ nav ul li:after {
     display: block;
 }
 
-nav ul li:last-child:after {
-    display: none;
-}
-
-nav ul li:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 11vw;
-    min-width: 120px;
-    height: 1px;
-    background: #fff;
-    content: '';
-    display: block;
-}
-
-nav ul li:first-child:before {
+nav ul li:last-child:after, nav ul li:first-child:before {
     display: none;
 }
 
@@ -70,7 +53,6 @@ nav ul li button {
 
 @media (max-width: 550px) {
     :host {
-        top: 8vh;
         left: 0;
         position: fixed;
         z-index: 10;
@@ -81,17 +63,28 @@ nav ul li button {
         min-width: 0;
         display: none;
         opacity: 0;
-        -moz-transition: 3s;
-        -ms-transition: 3s;
-        transition: 3s;
     }
 
     :host.active {
         display: block;
         opacity: 1;
-        -moz-transition: 3s;
-        -ms-transition: 3s;
-        transition: 3s;
+    }
+}
+
+@media (max-width: 1200px) {
+    :host{
+        display: none;
     }
 
+    :host.hide {
+        width: 0;
+        min-width: 0;
+        display: none;
+        opacity: 0;
+    }
+
+    :host.active {
+        display: block;
+        opacity: 1;
+    }
 }

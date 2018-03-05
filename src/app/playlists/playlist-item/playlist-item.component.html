@@ -1,9 +1,9 @@
-<div class="trigger" *ngFor="let song of data; let i=index" (click)="recieveSong(song)">
-    <div class="songInfo">
-        <h4>{{song.singer}}</h4>
-        <h5>{{song.title}}</h5>
+<div class="trigger" (click)="recieveSong(data)">
+    <div class="song-info">
+        <h4>{{data.singer}}</h4>
+        <h5>{{data.title}}</h5>
     </div>
-    <div class="songControls">
-        <button><span class="play"></span></button>
+    <div class="song-controls">
+        <button><fa [name]="'play'" [size]="1" class="fa play"></fa></button>
     </div>
 </div>

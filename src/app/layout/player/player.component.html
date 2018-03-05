@@ -1,0 +1,24 @@
+<div class="progress" #trackTime>
+    <div class="songTime" [ngStyle]="{'width.%' : (audio.currentTime / audio.duration) * 100}"></div>
+</div>
+<audio *ngIf="audio" #audioOption>
+    <source src="">
+</audio>
+<div class="controls">
+    <div class="song-controls">
+        <button (click)="changeSong(false)">
+            <fa [name]="'step-backward'" [size]="1" class="fa"></fa>
+        </button>
+        <button (click)="playPause(!playStatus)">
+            <fa [name]="'play'" [size]="1" class="fa play"*ngIf="!playStatus"></fa>
+            <fa [name]="'pause'" [size]="1"  class="fa" *ngIf="playStatus"></fa>
+        </button>
+        <button (click)="changeSong(true)">
+            <fa [name]="'step-forward'" [size]="1"  class="fa"></fa>
+        </button>
+    </div>
+    <div class="song-info">
+        <h4>{{selectedSong.singer}}</h4>
+        <h5>{{selectedSong.title}}</h5>
+    </div>
+</div>

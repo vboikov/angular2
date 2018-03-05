@@ -3,7 +3,7 @@
     height: 15px;
 }
 
-.progressBar {
+.progress-bar {
     background: #6f4c90;
     height: 15px;
     width: 0;
@@ -11,7 +11,7 @@
     float: left;
 }
 
-.progressBarOrange {
+.progress-bar-orange {
     background: #dc7001;
     height: 15px;
     width: 0;
@@ -19,12 +19,12 @@
     float: left;
 }
 
-.playlistControl {
+.playlist-control {
     padding: 15px;
     border-bottom: 1px solid #000;
 }
 
-.playlistControl a {
+.playlist-control a {
     display: inline-block;
     float: right;
     padding: 5px;
@@ -42,9 +42,10 @@ h2 {
     line-height: 1.2;
 }
 
-.trigger {
-    width: 80%;
+app-playlist-item {
+    max-width: 90%;
     display: block;
+    width: 90%;
     float: left;
 }
 
@@ -124,12 +125,12 @@ form button[type=submit]:hover {
     padding: 5px;
 }
 
-.songControls {
+.song-controls {
     width: 25%;
     float: right;
 }
 
-.songInfo {
+.song-info {
     width: 75%;
     float: left;
 }

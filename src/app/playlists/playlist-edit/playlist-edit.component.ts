@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Song} from '../../data/song';
-import {SongService} from '../../data/song.service';
-import {PlaylistService} from '../../data/playlist.service';
+import {SongService} from '../../shared/services/song.service';
+import {PlaylistService} from '../../shared/services/playlist.service';
 import {Playlist} from '../../data/playlist';
 import {Router, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {NgControl, NgForm} from '@angular/forms';
-import {FooterComponent} from '../../layout/footer/footer.component';
+import {PlayerComponent} from '../../layout/player/player.component';
 import * as _ from 'underscore';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -18,7 +18,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 export class PlaylistEditComponent implements OnInit, OnDestroy {
 
-	@ViewChild(FooterComponent) footer;
+	@ViewChild(PlayerComponent) footer;
 	@ViewChild('editPlaylistForm') formControlDir: NgForm;
 	@ViewChild('nameControl', {read: NgControl}) nameControlDir: NgControl;
 

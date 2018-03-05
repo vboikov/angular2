@@ -1,8 +1,8 @@
-export class Song {
+export interface Song {
   id: number;
-  constructor(public title: string,
-              public singer: string,
-              public album: string,
-              public infoSong: string,
-              public url: string) {}
+	title: string;
+	singer: string;
+	album: string;
+	infoSong: string;
+	url: string;
 }

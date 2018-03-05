@@ -1,4 +1,4 @@
-span {
+fa {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -10,41 +10,9 @@ span {
     position: relative;
     margin-left: 5px;
     margin-right: 5px;
-}
-
-span:after {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto;
-    color: #fff;
-}
-
-span.play:after {
-    content: '\25BA';
-    margin-right: -3px;
-    font-size: 14px;
     line-height: 26px;
-}
-
-span.stop:after {
-    content: '\25A0';
-    line-height: 19px;
-    font-size: 24px;
-}
-
-span.prevSong:after {
-    content: '\2190';
-    line-height: 21px;
-    font-size: 20px;
-}
-
-span.nextSong:after {
-    content: '\2192';
-    line-height: 21px;
-    font-size: 20px;
+    font-size: 12px;
+    color: #fff;
 }
 
 .progress {
@@ -70,12 +38,12 @@ span.nextSong:after {
     float: left;
 }
 
-.songControls {
+.song-controls {
     width: 50%;
     float: left;
 }
 
-.songInfo {
+.song-info {
     width: 50%;
     float: left;
     color: #fff;
@@ -89,6 +57,10 @@ button {
     -moz-border-radius: 50%;
     border-radius: 50%;
     cursor: pointer;
+}
+
+fa.play{
+    padding-left: 3px;
 }
 
 :host {

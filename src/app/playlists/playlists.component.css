@@ -1,9 +1,24 @@
-.playlistControl {
+:host {
+    position: relative;
+}
+
+.playlist-view {
+    height: 79vh;
+    overflow-y: scroll;
+    display: block;
+    padding: 20px;
+}
+
+app-playlist-item {
+
+}
+
+.playlist-control {
     padding: 15px;
     border-bottom: 1px solid #000;
 }
 
-.playlistControl button, .playlistControl a {
+.playlist-control button, .playlist-control a {
     display: block;
     float: right;
     padding: 5px;
@@ -17,28 +32,17 @@
     margin-right: 5px;
 }
 
-.playlistControl a {
+.playlist-control a {
     margin-right: 0;
 }
 
-app-playlist-item {
-    height: 79vh;
-    overflow-y: scroll;
-    display: block;
-    padding: 20px;
-}
-
-:host {
-    position: relative;
-}
-
 @media (max-width: 500px) {
-    .playlistControl select {
+    .playlist-control select {
         padding: 5px;
         height: 30px;
     }
 
-    app-footer-shelf {
+    app-player-shelf {
         width: 100%;
     }
 

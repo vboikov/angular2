@@ -8,20 +8,20 @@ import {AppRoutingModule, routedComponents} from './router.module';
 
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
-
+import {Angular2FontawesomeModule} from 'angular2-fontawesome/angular2-fontawesome'
 
 import {AppComponent} from './app.component';
-import {SongService} from './data/song.service';
-import {SongResolver} from './data/song.resolver';
+import {SongService} from './shared/services/song.service';
+import {SongResolver} from './shared/resolvers/song.resolver';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 
 
 import {AuthService} from './auth/auth.service';
 import {AuthorizedGuard} from './shared/guards/authorized.guard';
 import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
-import {UploadService} from './data/upload.service';
-import {PlaylistService} from './data/playlist.service';
-import {PlaylistResolver} from './data/playlist.resolver';
+import {UploadService} from './shared/services/upload.service';
+import {PlaylistService} from './shared/services/playlist.service';
+import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg',
@@ -45,7 +45,8 @@ export const firebaseConfig = {
 		HttpModule,
 		AngularFireModule.initializeApp(firebaseConfig),
 		AngularFireDatabaseModule,
-		AngularFireAuthModule
+		AngularFireAuthModule,
+		Angular2FontawesomeModule
 	],
 	providers: [
 		SongService,

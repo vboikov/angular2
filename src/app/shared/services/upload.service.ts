@@ -7,7 +7,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {Upload} from './upload';
+import {Upload} from '../../data/upload';
 
 
 @Injectable()

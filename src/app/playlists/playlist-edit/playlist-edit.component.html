@@ -11,11 +11,11 @@
             </div>
             <div class="trigger">
                 <div (click)="onSongClick(song)">
-                    <div class="songInfo">
+                    <div class="song-info">
                         <h4>{{song.singer}}</h4>
                         <h5>{{song.title}}</h5>
                     </div>
-                    <div class="songControls">
+                    <div class="song-controls">
                         <button><span class="play"></span></button>
                     </div>
                 </div>
@@ -23,5 +23,5 @@
         </div>
         <button type="submit">Update playlist</button>
     </form>
-    <app-footer-shelf [selectedSong]="selectedSong" *ngIf="selectedSong"></app-footer-shelf>
+    <app-player-shelf [selectedSong]="selectedSong" *ngIf="selectedSong"></app-player-shelf>
 </section>

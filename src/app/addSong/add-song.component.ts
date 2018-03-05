@@ -1,10 +1,10 @@
 import {Component, OnInit, Input, ViewChild, OnDestroy} from '@angular/core';
 import {Song} from '../data/song';
-import {SongService} from '../data/song.service';
+import {SongService} from '../shared/services/song.service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Upload} from '../data/upload';
-import {UploadService} from '../data/upload.service';
+import {UploadService} from '../shared/services/upload.service';
 import {Subscription} from 'rxjs/Subscription';
 
 
@@ -28,7 +28,6 @@ export class AddSongComponent implements OnInit, OnDestroy {
 	            private songService: SongService,
 	            private uplService: UploadService) {
 	};
-
 
 	ngOnInit() {
 		this.sub = this.formControlDir.form.valueChanges.subscribe(value => {

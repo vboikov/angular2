@@ -10,12 +10,12 @@
     padding: 5px;
 }
 
-.songControls {
+.song-controls {
     width: 25%;
     float: right;
 }
 
-.songInfo {
+.song-info {
     width: 75%;
     float: left;
 }
@@ -50,7 +50,7 @@
     cursor: pointer;
 }
 
-span {
+fa {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -60,27 +60,12 @@ span {
     border: 2px solid #fff;
     text-align: center;
     position: relative;
-}
-
-span:after {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto;
+    line-height: 26px;
+    font-size: 12px;
     color: #fff;
 }
 
-span.play:after {
-    content: '\25BA';
-    margin-right: -3px;
-    font-size: 14px;
-    line-height: 26px;
-}
 
-span.stop:after {
-    content: '\25A0';
-    line-height: 19px;
-    font-size: 22px;
+fa.play{
+    padding-left: 3px;
 }

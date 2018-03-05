@@ -1,24 +1,26 @@
-import {Component, ElementRef, Input, AfterViewInit, ViewChild, OnChanges, OnDestroy} from '@angular/core';
+import {Component, ElementRef, Input, AfterViewInit, ViewChild, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {Song} from '../../data/song';
 
 @Component({
-	selector: 'app-footer-shelf',
-	templateUrl: './footer.component.html',
-	styleUrls: ['./footer.component.css']
+	selector: 'app-player-shelf',
+	templateUrl: './player.component.html',
+	styleUrls: ['./player.component.css']
 })
-export class FooterComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class PlayerComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
 	@ViewChild('trackTime') trackTime: ElementRef;
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
 
-	public song: Song;
 	private storage = firebase.storage();
 	private starsRefAudio: any;
 	public playStatus = false;
 	public audio: HTMLAudioElement;
 
 	constructor() {
+	}
+
+	ngOnInit() {
 		this.audio = new Audio();
 	}
 
@@ -27,40 +29,49 @@ export class FooterComponent implements AfterViewInit, OnChanges, OnDestroy {
 			this.takeUrl(this.playStatus);
 		}
 	}
+
 	ngOnDestroy() {
 		this.playStatus = false;
-		this.takeUrl(this.playStatus);
+		this.playPause(false);
 	}
 
 	ngAfterViewInit() {
 		this.takeUrl(!this.playStatus);
 	}
 
-	takeUrl(status: boolean) {
-		this.playStatus = !status;
+	public playPause(state: boolean) {
+		if (!state) {
+			this.audio.pause();
+		} else {
+			this.audio.play();
+		}
+		this.playStatus = !this.playStatus;
+	}
+
+	public takeUrl(status: boolean) {
+		// TODO divide to few funсtions
+		const track = this.audio;
 		const trackTime = this.trackTime.nativeElement;
 		this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
+		this.playStatus = !status;
 		if (!this.playStatus) {
 			this.starsRefAudio.getDownloadURL().then(data => {
-				const track = this.audio;
-				track.pause();
 				track.src = data;
 				track.play();
-				this.playStatus = !this.playStatus;
 				trackTime.addEventListener('click', function (e) {
 					const timeStamp = e.offsetX / trackTime.offsetWidth;
 					track.currentTime = track.duration * timeStamp;
 				}, true);
+				this.playStatus = !this.playStatus;
 			}, err => {
 				console.log(err);
 			});
 		} else {
-			this.audio.pause();
-			this.playStatus = !this.playStatus;
+			this.playPause(true);
 		}
 	}
 
-	changeSong(state: boolean) {
+	public changeSong(state: boolean) {
 		let step;
 		const amount = this.songs.length - 1;
 		const indexOfSong = this.songs.indexOf(this.selectedSong);

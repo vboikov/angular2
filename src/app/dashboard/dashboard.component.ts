@@ -1,5 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
-import {HeaderComponent} from '../layout/header/header.component';
+import {Component} from '@angular/core';
 
 @Component({
 	selector: 'app-dashboard',
@@ -8,7 +7,6 @@ import {HeaderComponent} from '../layout/header/header.component';
 })
 export class DashboardComponent {
 	public menuState: boolean;
-	@ViewChild(HeaderComponent) child;
 
 	constructor() {
 	}

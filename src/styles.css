@@ -1,9 +1,12 @@
-*{
-  margin:0;
-  padding:0;
-  line-height: 1;
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+@import '~font-awesome/css/font-awesome.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 

@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Song} from '../../data/song';
 import {Router, ActivatedRoute} from '@angular/router';
-import {SongService} from '../../data/song.service';
+import {SongService} from '../../shared/services/song.service';
 
 @Component({
 	selector: 'app-playlist-item',
@@ -9,7 +9,7 @@ import {SongService} from '../../data/song.service';
 	styleUrls: ['./playlist-item.component.css']
 })
 export class PlaylistItemComponent {
-	@Input() data: Song[];
+	@Input() data: Song;
 	@Output() selectedSong: EventEmitter<Song> = new EventEmitter<Song>();
 	public playStatus = false;
 
