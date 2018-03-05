@@ -7,6 +7,6 @@
     <button [routerLink]="['../playlist-add']">Add playlist</button>
 </div>
 <section class="playlist-view">
-    <app-playlist-item *ngFor="let song of songs let i=index" [data]="song" (selectedSong)="onSongClick(song, i)"></app-playlist-item>
+    <app-playlist-item *ngFor="let song of songs let i=index" [data]="song" (selectedSong)="onSongClick(songs, i)"></app-playlist-item>
 </section>
-<app-player-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></app-player-shelf>
+<app-player-shelf [selectedSong]="selectedSong" [songs]="selectedSongs" *ngIf="selectedSong"></app-player-shelf>

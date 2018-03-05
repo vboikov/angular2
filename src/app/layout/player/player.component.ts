@@ -7,7 +7,7 @@ import {Song} from '../../data/song';
 	templateUrl: './player.component.html',
 	styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
+export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	@ViewChild('trackTime') trackTime: ElementRef;
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
@@ -18,25 +18,20 @@ export class PlayerComponent implements AfterViewInit, OnChanges, OnDestroy, OnI
 	public audio: HTMLAudioElement;
 
 	constructor() {
-	}
-
-	ngOnInit() {
 		this.audio = new Audio();
 	}
 
+	ngOnInit() {
+	}
+
 	ngOnChanges() {
-		if (this.playStatus) {
-			this.takeUrl(this.playStatus);
-		}
+		this.takeUrl();
+		this.playStatus = true;
 	}
 
 	ngOnDestroy() {
 		this.playStatus = false;
 		this.playPause(false);
-	}
-
-	ngAfterViewInit() {
-		this.takeUrl(!this.playStatus);
 	}
 
 	public playPause(state: boolean) {
@@ -48,27 +43,22 @@ export class PlayerComponent implements AfterViewInit, OnChanges, OnDestroy, OnI
 		this.playStatus = !this.playStatus;
 	}
 
-	public takeUrl(status: boolean) {
+	public takeUrl() {
 		// TODO divide to few funсtions
 		const track = this.audio;
 		const trackTime = this.trackTime.nativeElement;
 		this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
-		this.playStatus = !status;
-		if (!this.playStatus) {
-			this.starsRefAudio.getDownloadURL().then(data => {
-				track.src = data;
-				track.play();
-				trackTime.addEventListener('click', function (e) {
-					const timeStamp = e.offsetX / trackTime.offsetWidth;
-					track.currentTime = track.duration * timeStamp;
-				}, true);
-				this.playStatus = !this.playStatus;
-			}, err => {
-				console.log(err);
-			});
-		} else {
-			this.playPause(true);
-		}
+		this.starsRefAudio.getDownloadURL().then(data => {
+			track.src = data;
+			track.play();
+			// Search timeline
+			trackTime.addEventListener('click', function (e) {
+				const timeStamp = e.offsetX / trackTime.offsetWidth;
+				track.currentTime = track.duration * timeStamp;
+			}, true);
+		}, err => {
+			console.log(err);
+		});
 	}
 
 	public changeSong(state: boolean) {
@@ -92,6 +82,6 @@ export class PlayerComponent implements AfterViewInit, OnChanges, OnDestroy, OnI
 				this.selectedSong = this.songs[step];
 			}
 		}
-		this.takeUrl(this.playStatus);
+		this.takeUrl();
 	}
 }

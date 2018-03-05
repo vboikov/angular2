@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy, ViewChild, OnChanges} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {Song} from '../data/song';
 import {SongService} from '../shared/services/song.service';
 import {PlayerComponent} from '../layout/player/player.component';
@@ -23,6 +23,7 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 	public selectedSong: Song;
 	public playlists: Playlist[];
 	public choosePlaylist: Playlist;
+	public selectedSongs: Song[];
 
 	constructor(private db: AngularFireDatabase,
 	            private songService: SongService,
@@ -49,13 +50,16 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	// Visual changes for playlist
 	onListChange(event) {
 		this.songs = event.songs;
-		// this.selectedSong = this.songs[0];
 	}
 
-	onSongClick(song: Song, i: number): void {
-		this.selectedSong = song;
+	// Recieve songs for player component
+	onSongClick(songs: Song[], i: number): void {
+		this.selectedSongs = songs;
+		this.selectedSong = this.selectedSongs[i];
+
 	}
 
 	edit(id: number) {
