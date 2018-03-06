@@ -47,7 +47,6 @@ export class PlaylistAddComponent implements OnInit, OnDestroy {
 		});
 		this.formControlDir.form.valueChanges.subscribe(value => {
 			this.formValue = value;
-
 		});
 	}
 
