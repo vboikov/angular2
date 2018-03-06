@@ -1,6 +1,7 @@
-import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {Song} from '../../data/song';
+import Reference = firebase.storage.Reference;
 
 @Component({
 	selector: 'app-player-shelf',
@@ -8,23 +9,19 @@ import {Song} from '../../data/song';
 	styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
-	@ViewChild('trackTime') trackTime: ElementRef;
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
 
 	private storage = firebase.storage();
-	private starsRefAudio: any;
+	private starsRefAudio: Reference;
 	public playStatus = false;
 	public audio: HTMLAudioElement;
-	// TODO create dir
-	public searchLine: HTMLDivElement;
 
 	constructor() {
 		this.audio = new Audio();
 	}
 
 	ngOnInit() {
-		this.searchLine = this.trackTime.nativeElement;
 		this.audio.addEventListener('ended', this.changeSong.bind(this, true), true);
 	}
 
@@ -57,11 +54,6 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 		}, err => {
 			console.log(err);
 		});
-	}
-
-	public searchTime(e) {
-		const timeStamp = e.offsetX / this.searchLine.offsetWidth;
-		this.audio.currentTime = this.audio.duration * timeStamp;
 	}
 
 	public changeSong(state: boolean) {

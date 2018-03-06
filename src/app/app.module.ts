@@ -22,6 +22,7 @@ import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
 import {UploadService} from './shared/services/upload.service';
 import {PlaylistService} from './shared/services/playlist.service';
 import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
+import {SearchDirective} from './shared/directives/search.directive';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg',
@@ -35,6 +36,7 @@ export const firebaseConfig = {
 
 @NgModule({
 	declarations: [
+		SearchDirective,
 		routedComponents
 	],
 	imports: [
