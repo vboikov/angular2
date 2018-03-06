@@ -18,7 +18,7 @@ export class PlaylistItemComponent {
 	            private songService: SongService) {
 	}
 
-	recieveSong(song: Song): void {
+	public recieveSong(song: Song): void {
 		this.selectedSong.emit(song);
 		this.playStatus = !this.playStatus;
 	}

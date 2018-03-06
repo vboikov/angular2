@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, AfterViewInit, ViewChild, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {Song} from '../../data/song';
 
@@ -16,12 +16,16 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	private starsRefAudio: any;
 	public playStatus = false;
 	public audio: HTMLAudioElement;
+	// TODO create dir
+	public searchLine: HTMLDivElement;
 
 	constructor() {
 		this.audio = new Audio();
 	}
 
 	ngOnInit() {
+		this.searchLine = this.trackTime.nativeElement;
+		this.audio.addEventListener('ended', this.changeSong.bind(this, true), true);
 	}
 
 	ngOnChanges() {
@@ -44,21 +48,20 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	}
 
 	public takeUrl() {
-		// TODO divide to few funсtions
 		const track = this.audio;
-		const trackTime = this.trackTime.nativeElement;
 		this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
 		this.starsRefAudio.getDownloadURL().then(data => {
 			track.src = data;
+			// TODO service for play state
 			track.play();
-			// Search timeline
-			trackTime.addEventListener('click', function (e) {
-				const timeStamp = e.offsetX / trackTime.offsetWidth;
-				track.currentTime = track.duration * timeStamp;
-			}, true);
 		}, err => {
 			console.log(err);
 		});
+	}
+
+	public searchTime(e) {
+		const timeStamp = e.offsetX / this.searchLine.offsetWidth;
+		this.audio.currentTime = this.audio.duration * timeStamp;
 	}
 
 	public changeSong(state: boolean) {
