@@ -1,14 +1,15 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Song} from '../../data/song';
+import {Song} from '../../interfaces/song';
 import {SongService} from '../../shared/services/song.service';
 import {PlaylistService} from '../../shared/services/playlist.service';
-import {Playlist} from '../../data/playlist';
+import {Playlist} from '../../interfaces/playlist';
 import {Router, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import {NgControl, NgForm} from '@angular/forms';
 import {PlayerComponent} from '../../layout/player/player.component';
 import * as _ from 'underscore';
 import {Subscription} from 'rxjs/Subscription';
+import {PlaystatusService} from '../../shared/services/playstatus.service';
 
 @Component({
 	selector: 'app-playlists-edit',
@@ -18,28 +19,33 @@ import {Subscription} from 'rxjs/Subscription';
 
 export class PlaylistEditComponent implements OnInit, OnDestroy {
 
-	@ViewChild(PlayerComponent) footer;
+	@ViewChild(PlayerComponent) player;
 	@ViewChild('editPlaylistForm') formControlDir: NgForm;
 	@ViewChild('nameControl', {read: NgControl}) nameControlDir: NgControl;
 
-	private formValue: any;
 	private sub: Subscription;
 	public playlist: Playlist;
 	public songs: Song[];
 	public selectedSong: Song;
-	public playStatus = false;
+	public playSongId: number;
+	public editFlag: boolean;
 	public playlists: Playlist[];
 
 	constructor(private songService: SongService,
 	            private playlistService: PlaylistService,
+	            private playstatusService: PlaystatusService,
 	            private router: Router,
 	            private route: ActivatedRoute) {
 		route.data.subscribe(data => this.playlist = data['playlist']);
 	};
 
 	ngOnInit() {
+		this.checkEditFlag();
 		this.sub = this.songService.getSongs().subscribe(songs => {
 			this.songs = songs;
+		});
+		this.playstatusService.isPlayId$.subscribe((newId: number) => {
+			this.playSongId = newId;
 		});
 	}
 
@@ -51,7 +57,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 
 	onSongClick(song: Song): void {
 		this.selectedSong = song;
-		this.playStatus = !this.playStatus;
+		this.playstatusService.isPlayId = song.id;
 	}
 
 	onAddToPlaylist(e, song: Song) {
@@ -72,6 +78,24 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 			alert('Please fill all fields');
 		}
 	}
+
+	addPlaylist(title) {
+		if (title && this.playlist.songs.length) {
+			this.playlistService.addPlaylist(title, this.playlist.songs);
+			this.router.navigate(['musicshelf/playlists']);
+		} else {
+			alert('Please fill all fields');
+		}
+	}
+
+	checkEditFlag() {
+		if (this.route.snapshot.url[0].path === 'playlist-add') {
+			this.editFlag = false;
+		} else {
+			this.editFlag = true;
+		}
+	}
+
 
 	ngOnDestroy() {
 		this.sub.unsubscribe();

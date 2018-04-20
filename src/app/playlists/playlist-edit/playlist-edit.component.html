@@ -9,19 +9,13 @@
             <div class="checkbox">
                 <input type="checkbox" (change)="onAddToPlaylist($event, song)" [checked]="isChecked(song.id)">
             </div>
-            <div class="trigger">
-                <div (click)="onSongClick(song)">
-                    <div class="song-info">
-                        <h4>{{song.singer}}</h4>
-                        <h5>{{song.title}}</h5>
-                    </div>
-                    <div class="song-controls">
-                        <button><span class="play"></span></button>
-                    </div>
-                </div>
-            </div>
+            <app-playlist-item [data]="song" (click)="onSongClick(song)"
+                               [ngClass]="{'play' : playSongId === song.id}"></app-playlist-item>
         </div>
-        <button type="submit">Update playlist</button>
+        <div class="form-buttons">
+            <button *ngIf="editFlag" type="submit">Update playlist</button>
+            <button *ngIf="!editFlag" (click)="addPlaylist(playlist.title)">Add playlist</button>
+        </div>
     </form>
-    <app-player-shelf [selectedSong]="selectedSong" *ngIf="selectedSong"></app-player-shelf>
+    <app-player-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></app-player-shelf>
 </section>

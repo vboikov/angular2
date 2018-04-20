@@ -10,6 +10,7 @@
     <app-playlist-item *ngFor="let song of songs let i=index"
                        [data]="song"
                        (selectedSong)="onSongClick(songs, i)"
+                       [ngClass]="{'play' : playSongId === song.id}"
                        ></app-playlist-item>
 </section>
 <app-player-shelf [selectedSong]="selectedSong" [songs]="selectedSongs" *ngIf="selectedSong"></app-player-shelf>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Upload} from '../../data/upload';
+import {Upload} from '../../interfaces/upload';
 import {UploadService} from '../../shared/services/upload.service';
 
 @Component({

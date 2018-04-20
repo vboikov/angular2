@@ -1,12 +1,14 @@
 import {Component, Input, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {Song} from '../data/song';
+import {Song} from '../interfaces/song';
 import {SongService} from '../shared/services/song.service';
 import {PlayerComponent} from '../layout/player/player.component';
 import {PlaylistService} from '../shared/services/playlist.service';
-import {Playlist} from '../data/playlist';
+import {Playlist} from '../interfaces/playlist';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {PlaystatusService} from '../shared/services/playstatus.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-playlists',
@@ -24,10 +26,12 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 	public playlists: Playlist[];
 	public choosePlaylist: Playlist;
 	public selectedSongs: Song[];
-
+	public playSongId: number;
+	public playSong$: Observable<number>;
 	constructor(private db: AngularFireDatabase,
 	            private songService: SongService,
 	            private playlistService: PlaylistService,
+	            private playstatusService: PlaystatusService,
 	            private router: Router) {
 
 	};
@@ -48,7 +52,11 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 				this.songs = this.choosePlaylist.songs;
 			}
 		});
+		this.playstatusService.isPlayId$.subscribe((newId: number) => {
+			this.playSongId = newId;
+		});
 	}
+
 
 	// Visual changes for playlist
 	onListChange(event) {
@@ -59,7 +67,7 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 	onSongClick(songs: Song[], i: number): void {
 		this.selectedSongs = songs;
 		this.selectedSong = this.selectedSongs[i];
-
+		this.playstatusService.isPlayId = this.selectedSongs[i].id;
 	}
 
 	edit(id: number) {

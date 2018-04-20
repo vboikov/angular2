@@ -5,62 +5,6 @@ section{
     float: left;
 }
 
-/*.playlistheader{*/
-    /*width: 100%;*/
-    /*float: left;*/
-    /*margin-bottom: 10px;*/
-    /*line-height: 35px;*/
-/*}*/
-
-/*.playlist{*/
-    /*display: block;*/
-    /*width: 100%;*/
-    /*height: auto;*/
-    /*float: left;*/
-    /*margin-bottom: 10px;*/
-    /*padding: 5px;*/
-    /*border: 1px solid #ebebeb;*/
-/*}*/
-
-/*.playlist h3, .playlist h4, .playlist button{*/
-    /*display: inline-block;*/
-/*}*/
-
-/*.playlist button{*/
-    /*float: right;*/
-    /*line-height: 36px;*/
-    /*padding: 0 10px 0 10px;*/
-    /*border: 1px solid #000;*/
-    /*cursor: pointer;*/
-    /*text-decoration: none;*/
-    /*color: #fff;*/
-    /*background: #6f4c90;*/
-    /*font-size: 16px;*/
-    /*margin-left: 5px;*/
-    /*margin-right: 5px;*/
-/*}*/
-
-/*.playlist h3{*/
-    /*font-size: 10px;*/
-    /*padding-left: 15px;*/
-/*}*/
-
-/*.playlistSongs{*/
-    /*display: block;*/
-    /*float: left;*/
-    /*width: 100%;*/
-    /*height: 38px;*/
-    /*line-height: 35px;*/
-    /*margin-bottom: 10px;*/
-    /*border: 1px solid #ebebeb;*/
-    /*padding-left: 10px;*/
-/*}*/
-
-/*.playlistSongs h5{*/
-    /*display: inline-block;*/
-    /*max-width: 33%;*/
-/*}*/
-
 @media (max-width: 600px) {
     section{
         max-height: 92vh;
@@ -165,7 +109,7 @@ form label {
     display: block;
 }
 
-form button[type=submit] {
+form .form-buttons button {
     display: block;
     margin: 0 auto;
     padding: 5px;
@@ -177,7 +121,7 @@ form button[type=submit] {
 
 }
 
-form button[type=submit]:hover {
+form .form-buttons button:hover {
     background: #4d356b;
 
 }
@@ -267,5 +211,12 @@ span.stop:after {
     content: '\25A0';
     line-height: 19px;
     font-size: 22px;
+}
+
+app-playlist-item {
+    max-width: 90%;
+    display: block;
+    width: 90%;
+    float: left;
 }
 

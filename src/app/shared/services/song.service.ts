@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {Song} from '../../data/song';
+import {Song} from '../../interfaces/song';
 
 import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 

@@ -1,9 +1,9 @@
 import {Component, OnInit, Input, ViewChild, OnDestroy} from '@angular/core';
-import {Song} from '../data/song';
+import {Song} from '../interfaces/song';
 import {SongService} from '../shared/services/song.service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Upload} from '../data/upload';
+import {Upload} from '../interfaces/upload';
 import {UploadService} from '../shared/services/upload.service';
 import {Subscription} from 'rxjs/Subscription';
 

@@ -1,7 +1,8 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase/app';
-import {Song} from '../../data/song';
+import {Song} from '../../interfaces/song';
 import Reference = firebase.storage.Reference;
+import {PlaystatusService} from '../../shared/services/playstatus.service';
 
 @Component({
 	selector: 'app-player-shelf',
@@ -17,7 +18,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	public playStatus = false;
 	public audio: HTMLAudioElement;
 
-	constructor() {
+	constructor(private playstatusService: PlaystatusService) {
 		this.audio = new Audio();
 	}
 
@@ -35,6 +36,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 		this.playPause(false);
 	}
 
+
 	public playPause(state: boolean) {
 		if (!state) {
 			this.audio.pause();
@@ -42,6 +44,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 			this.audio.play();
 		}
 		this.playStatus = !this.playStatus;
+
 	}
 
 	public takeUrl() {
@@ -77,6 +80,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 				this.selectedSong = this.songs[step];
 			}
 		}
+		this.playstatusService.isPlayId = this.selectedSong.id;
 		this.takeUrl();
 	}
 }

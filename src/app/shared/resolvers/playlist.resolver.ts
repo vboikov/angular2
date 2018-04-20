@@ -15,6 +15,10 @@ export class PlaylistResolver implements Resolve<FirebaseObjectObservable<any>> 
 	resolve(route: ActivatedRouteSnapshot,
 	        state: RouterStateSnapshot): Promise<FirebaseObjectObservable<any>> {
 		const url = route.params['id'];
-		return this.playlistService.getPlaylistById(url).first();
+		if (url) {
+			return this.playlistService.getPlaylistById(url).first();
+		} else {
+			return this.playlistService.getNewPlaylist();
+		}
 	}
 }

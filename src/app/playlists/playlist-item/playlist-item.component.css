@@ -65,7 +65,22 @@ fa {
     color: #fff;
 }
 
+:host.play .trigger{
+    background-color: #eaeaea;
+}
+
+:host.play .trigger fa.play{
+    display: none;
+}
+
+:host.play .trigger fa.pause{
+    display: block;
+}
 
 fa.play{
     padding-left: 3px;
+}
+
+fa.pause{
+    display: none;
 }

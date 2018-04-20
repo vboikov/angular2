@@ -13,7 +13,6 @@ import {PlayerComponent} from './layout/player/player.component';
 import {AuthorizedGuard} from './shared/guards/authorized.guard';
 import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
 import {UploadComponent} from './layout/upload/upload.component';
-import {PlaylistAddComponent} from './playlists/playlist-add/playlist-add.component';
 import {PlaylistItemComponent} from './playlists/playlist-item/playlist-item.component';
 import {PlaylistEditComponent} from './playlists/playlist-edit/playlist-edit.component';
 
@@ -35,7 +34,14 @@ export const routes: Routes = [
 		children: [
 			{path: 'addsong', component: AddSongComponent, canActivate: [AuthorizedGuard]},
 			{path: 'playlists', component: PlaylistsComponent, canActivate: [AuthorizedGuard]},
-			{path: 'playlist-add', component: PlaylistAddComponent, canActivate: [AuthorizedGuard]},
+			{
+				path: 'playlist-add',
+				component: PlaylistEditComponent,
+				canActivate: [AuthorizedGuard],
+				resolve: {
+					playlist: PlaylistResolver
+				}
+			},
 			{
 				path: 'playlists-edit/:id',
 				component: PlaylistEditComponent,
@@ -71,7 +77,6 @@ export const routedComponents = [
 	NavComponent,
 	PlayerComponent,
 	UploadComponent,
-	PlaylistAddComponent,
 	PlaylistItemComponent,
 	PlaylistEditComponent
 ];

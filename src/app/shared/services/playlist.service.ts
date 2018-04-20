@@ -5,9 +5,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import {Playlist} from '../../data/playlist';
-import {Song} from '../../data/song';
-
+import {Playlist} from '../../interfaces/playlist';
+import {Song} from '../../interfaces/song';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class PlaylistService {
@@ -15,7 +16,8 @@ export class PlaylistService {
 	public itemId: any;
 	private items: FirebaseListObservable<Playlist[]>;
 
-	constructor(private db: AngularFireDatabase) {}
+	constructor(private db: AngularFireDatabase) {
+	}
 
 	getPlaylists() {
 		this.items = <FirebaseListObservable<Playlist[]>>this.db.list('playlists').map(data => {
@@ -50,5 +52,14 @@ export class PlaylistService {
 		const path = 'playlists/' + playlist.$key;
 		this.db.object(path).update(playlist)
 		.catch(error => console.log(error));
+	}
+
+	public getNewPlaylist(): any {
+		this.getPlaylists();
+		return {
+			songs: [],
+			title: '',
+			id: this.amount
+		};
 	}
 }

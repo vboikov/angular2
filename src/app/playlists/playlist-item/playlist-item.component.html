@@ -1,13 +1,12 @@
-<div class="trigger" (click)="recieveSong(data)" [ngClass]="{'pause': data.id === selectedSong.id}">
+<div class="trigger" (click)="recieveSong(data)">
     <div class="song-info">
         <h4>{{data.singer}}</h4>
         <h5>{{data.title}}</h5>
     </div>
     <div class="song-controls">
         <button>
-            <!--Need to update ico of playlist item control-->
             <fa [name]="'play'" [size]="1" class="fa play"></fa>
-            <!--<fa [name]="'pause'" [size]="1" class="fa"></fa>-->
+            <fa [name]="'pause'" [size]="1" class="fa pause"></fa>
         </button>
     </div>
 </div>

@@ -12,7 +12,6 @@ import {Angular2FontawesomeModule} from 'angular2-fontawesome/angular2-fontaweso
 
 import {AppComponent} from './app.component';
 import {SongService} from './shared/services/song.service';
-import {SongResolver} from './shared/resolvers/song.resolver';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 
 
@@ -23,6 +22,14 @@ import {UploadService} from './shared/services/upload.service';
 import {PlaylistService} from './shared/services/playlist.service';
 import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
 import {SearchDirective} from './shared/directives/search.directive';
+import {PlaystatusService} from './shared/services/playstatus.service';
+import {
+	GoogleApiModule,
+	GoogleApiService,
+	GoogleAuthService,
+	NgGapiClientConfig,
+	NG_GAPI_CONFIG,
+	GoogleApiConfig} from 'ng-gapi';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg',
@@ -31,6 +38,16 @@ export const firebaseConfig = {
 	projectId: 'musicshelf-abe0d',
 	storageBucket: 'musicshelf-abe0d.appspot.com',
 	messagingSenderId: '851470382067'
+};
+
+const gapiClientConfig: NgGapiClientConfig = {
+	client_id: '851470382067-u1ptf792b66agnv7h1a76mp8hskc9ggt.apps.googleusercontent.com',
+	discoveryDocs: [
+		'https://www.googleapis.com/discovery/v1/apis/drive/v2/rest'
+	],
+	scope: [
+		'https://www.googleapis.com/auth/drive'
+	].join(' ')
 };
 
 
@@ -48,16 +65,20 @@ export const firebaseConfig = {
 		AngularFireModule.initializeApp(firebaseConfig),
 		AngularFireDatabaseModule,
 		AngularFireAuthModule,
-		Angular2FontawesomeModule
+		Angular2FontawesomeModule,
+		GoogleApiModule.forRoot({
+			provide: NG_GAPI_CONFIG,
+			useValue: gapiClientConfig
+		})
 	],
 	providers: [
 		SongService,
 		PlaylistService,
-		SongResolver,
 		AuthService,
 		AuthorizedGuard,
 		UnauthorizedGuard,
 		UploadService,
+		PlaystatusService,
 		PlaylistResolver
 	],
 	bootstrap: [AppComponent]
