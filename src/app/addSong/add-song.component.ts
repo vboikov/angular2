@@ -45,16 +45,17 @@ export class AddSongComponent implements OnInit, OnDestroy {
 	}
 
 	detectFiles(event) {
-		if (event.target.files[0].type === 'audio/mp3') {
-			this.selectedFile = event.target.files[0];
-		} else {
-			alert('Only .mp3');
-		}
+		this.selectedFile = event.target.files[0];
+		// if (event.target.files[0].type === 'audio/mp3') {
+		// 	this.selectedFile = event.target.files[0];
+		// } else {
+		// 	alert('Only .mp3');
+		// }
 	}
 
 	uploadSingle() {
 		this.currentUpload = new Upload(this.selectedFile);
-		this.uplService.pushUpload(this.currentUpload);
+		this.uplService.upload(this.currentUpload);
 	}
 
 	ngOnDestroy() {
