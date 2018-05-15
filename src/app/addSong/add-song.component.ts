@@ -23,6 +23,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
 	public formValue: any;
 	public selectedFile: File;
 	public currentUpload: Upload;
+	public fileId: any;
 
 	constructor(private router: Router,
 	            private songService: SongService,
@@ -37,25 +38,21 @@ export class AddSongComponent implements OnInit, OnDestroy {
 
 	onSubmit(obj) {
 		if (obj.title && obj.singer && obj.album && obj.infoSong) {
-			this.songService.addSong(obj);
-			this.uploadSingle();
+			this.uplService.upload(this.selectedFile).then((res) => {
+				this.fileId = res;
+				this.songService.addSong(obj, res);
+			});
 		} else {
 			alert('Please fill all fields');
 		}
 	}
 
 	detectFiles(event) {
-		this.selectedFile = event.target.files[0];
-		// if (event.target.files[0].type === 'audio/mp3') {
-		// 	this.selectedFile = event.target.files[0];
-		// } else {
-		// 	alert('Only .mp3');
-		// }
-	}
-
-	uploadSingle() {
-		this.currentUpload = new Upload(this.selectedFile);
-		this.uplService.upload(this.currentUpload);
+		if (event.target.files[0].type === 'audio/mp3') {
+			this.selectedFile = event.target.files[0];
+		} else {
+			alert('Only .mp3');
+		}
 	}
 
 	ngOnDestroy() {

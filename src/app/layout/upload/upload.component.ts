@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {Upload} from '../../interfaces/upload';
-import {UploadService} from '../../shared/services/upload.service';
 
 @Component({
 	selector: 'app-upload-shelf',
@@ -10,18 +8,11 @@ import {UploadService} from '../../shared/services/upload.service';
 })
 export class UploadComponent {
 	public selectedFiles: FileList;
-	public currentUpload: Upload;
 
-	constructor(public router: Router, private uplService: UploadService) {
+	constructor(public router: Router) {
 	}
 
 	detectFiles(event) {
 		this.selectedFiles = event.target.files;
-	}
-
-	uploadSingle() {
-		const file = this.selectedFiles.item(0);
-		this.currentUpload = new Upload(file);
-		this.uplService.pushUpload(this.currentUpload);
 	}
 }

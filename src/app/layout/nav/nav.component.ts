@@ -14,13 +14,13 @@ export class NavComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.loggedUser = this.authService.loggedUserInfo;
+		this.loggedUser = this.authService.auth2UserToken;
 	}
 
 	logout() {
-		this.authService.logout();
+		this.authService.logOut();
 		this.router.navigate(['/auth']);
-		this.loggedUser = this.authService.loggedUserInfo;
+		this.loggedUser = this.authService.auth2UserToken;
 	}
 
 
