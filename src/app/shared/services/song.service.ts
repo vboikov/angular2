@@ -18,7 +18,7 @@ export class SongService {
 	}
 
 	getSongs() {
-		const userToken = this.authService.auth2UserToken;
+		const userToken = this.authService.auth2UserToken();
 		return this.items = <FirebaseListObservable<Song[]>>this.db.list('users/' + userToken + 'songs/').map(data => {
 			this.amount = data.length;
 			return data;
@@ -26,7 +26,7 @@ export class SongService {
 	}
 
 	addSong(song: Song, fileId): void {
-		const userToken = this.authService.auth2UserToken;
+		const userToken = this.authService.auth2UserToken();
 		this.getSongs();
 		console.log(this.getSongs());
 		if (this.amount === 0) {
@@ -38,7 +38,7 @@ export class SongService {
 				url: fileId,
 				id: 0
 			};
-			this.db.database.ref('users/' + userToken + 'songs/' + fileId).set(itemSong);
+			this.db.database.ref('users/' + userToken).child('songs').set(itemSong);
 		} else {
 			const itemSong = {
 				singer: song.singer,
