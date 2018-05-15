@@ -14,7 +14,7 @@ export class AuthorizedGuard implements CanActivate {
 	canActivate(next: ActivatedRouteSnapshot,
 	            state: RouterStateSnapshot): boolean {
 
-		if (this.authService.auth2UserToken) {
+		if (this.authService.auth2UserToken()) {
 			return true;
 		} else {
 			this.router.navigate(['/auth']);

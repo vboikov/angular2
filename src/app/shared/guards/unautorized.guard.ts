@@ -12,7 +12,7 @@ export class UnauthorizedGuard implements CanActivate {
 
 	canActivate(next: ActivatedRouteSnapshot,
 	            state: RouterStateSnapshot): boolean {
-		if (this.authService.auth2UserToken) {
+		if (this.authService.auth2UserToken()) {
 			this.router.navigate(['/musicshelf/playlists']);
 			return false;
 		} else {

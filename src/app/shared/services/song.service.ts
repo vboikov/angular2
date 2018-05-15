@@ -13,43 +13,32 @@ import {AuthService} from '../../auth/auth.service';
 export class SongService {
 	private amount = 0;
 	private items: FirebaseListObservable<Song[]>;
-
+	public songs: any;
 	constructor(private db: AngularFireDatabase, private authService: AuthService) {
 	}
 
 	getSongs() {
 		const userToken = this.authService.auth2UserToken();
-		return this.items = <FirebaseListObservable<Song[]>>this.db.list('users/' + userToken + 'songs/').map(data => {
-			this.amount = data.length;
+		this.items = <FirebaseListObservable<Song[]>>this.db.list('users/' + userToken + 'songs/').map(data => {
 			return data;
 		});
+		return this.items;
 	}
 
 	addSong(song: Song, fileId): void {
 		const userToken = this.authService.auth2UserToken();
-		this.getSongs();
-		console.log(this.getSongs());
-		if (this.amount === 0) {
-			const itemSong = {
-				singer: song.singer,
-				title: song.title,
-				album: song.album,
-				infoSong: song.infoSong,
-				url: fileId,
-				id: 0
-			};
-			this.db.database.ref('users/' + userToken).child('songs').set(itemSong);
-		} else {
-			const itemSong = {
-				singer: song.singer,
-				title: song.title,
-				album: song.album,
-				infoSong: song.infoSong,
-				url: fileId,
-				id: this.amount
-			};
-			this.items.push(itemSong);
-		}
+		const itemSong = {
+			singer: song.singer,
+			title: song.title,
+			album: song.album,
+			infoSong: song.infoSong,
+			url: fileId
+		};
+		this.songs = this.getSongs().subscribe((data) => {
+			if (data.length) {
+				this.db.database.ref('users/' + userToken).child('songs').push(itemSong);
+			}
+		});
 	}
 
 	deleteSong(i): void {
