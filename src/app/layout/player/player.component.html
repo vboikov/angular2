@@ -2,7 +2,7 @@
     <div class="songTime" [ngStyle]="{'width.%' : (audio.currentTime / audio.duration) * 100}"></div>
 </div>
 <audio *ngIf="audio" #audioOption crossorigin="anonymous">
-    <source src="">
+    <source src="" >
 </audio>
 <div class="controls">
     <div class="song-controls">
@@ -10,7 +10,7 @@
             <fa [name]="'step-backward'" [size]="1" class="fa"></fa>
         </button>
         <button (click)="playPause(!playStatus)">
-            <fa [name]="'play'" [size]="1" class="fa play"*ngIf="!playStatus"></fa>
+            <fa [name]="'play'" [size]="1" class="fa play" *ngIf="!playStatus"></fa>
             <fa [name]="'pause'" [size]="1"  class="fa" *ngIf="playStatus"></fa>
         </button>
         <button (click)="changeSong(true)">

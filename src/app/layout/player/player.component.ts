@@ -1,7 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import * as firebase from 'firebase/app';
 import {Song} from '../../interfaces/song';
-import Reference = firebase.storage.Reference;
 import {PlaystatusService} from '../../shared/services/playstatus.service';
 
 @Component({
@@ -13,7 +11,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
 
-	private URL = 'https://drive.google.com/uc?export=download&id=';
+	private URL = 'https://docs.google.com/uc?authuser=0&id=';
 	public playStatus = false;
 	public audio: HTMLAudioElement;
 
@@ -48,18 +46,8 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 
 	public takeUrl() {
 		const track = this.audio;
-		// this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
-		// this.starsRefAudio.getDownloadURL().then(data => {
-		// 	track.src = data;
-		// 	// TODO service for play state
-		// 	track.play();
-		// }, err => {
-		// 	console.log(err);
-		// });
-		const fileURL = this.URL  + this.selectedSong.url;
-		track.src = fileURL;
-		// track.play();
-		console.log(track.src);
+		track.src = this.URL  + this.selectedSong.url + '&type=.mp3';
+		track.play();
 	}
 
 	public changeSong(state: boolean) {
