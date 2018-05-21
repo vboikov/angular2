@@ -1,7 +1,7 @@
 <div class="progress" appSearch [appAudio]="audio">
     <div class="songTime" [ngStyle]="{'width.%' : (audio.currentTime / audio.duration) * 100}"></div>
 </div>
-<audio *ngIf="audio" #audioOption>
+<audio *ngIf="audio" #audioOption crossorigin="anonymous">
     <source src="">
 </audio>
 <div class="controls">

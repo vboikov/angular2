@@ -9,36 +9,37 @@ import {Playlist} from '../../interfaces/playlist';
 import {Song} from '../../interfaces/song';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {AuthService} from '../../auth/auth.service';
 
 @Injectable()
 export class PlaylistService {
 	private amount = 0;
 	public itemId: any;
+	public userToken: string;
 	private items: FirebaseListObservable<Playlist[]>;
 
-	constructor(private db: AngularFireDatabase) {
+	constructor(private db: AngularFireDatabase, private authService: AuthService) {
+		this.userToken = this.authService.auth2UserToken();
 	}
 
-	getPlaylists() {
-		this.items = <FirebaseListObservable<Playlist[]>>this.db.list('playlists').map(data => {
+	public getPlaylists() {
+		return this.items = <FirebaseListObservable<Playlist[]>>this.db.list('users/' + this.userToken + '/playlists').map(data => {
 			this.amount = data.length;
 			return data;
 		});
-		return this.items;
 	}
 
-	getPlaylistById(id): any {
-		this.itemId = this.db.list('playlists').map(data => {
+	public getPlaylistById(id): any {
+		return this.itemId = this.db.list('users/' + this.userToken + '/playlists').map(data => {
 			return data[id];
 		});
-		return this.itemId;
 	}
 
-	addPlaylist(title, songs: Song[]): void {
+	public addPlaylist(playlist): void {
 		this.getPlaylists();
 		const itemPlaylist = {
-			songs: songs,
-			title: title,
+			songs: playlist.songs,
+			title: playlist.title,
 			id: this.amount
 		};
 		this.items.push(itemPlaylist);
@@ -48,9 +49,9 @@ export class PlaylistService {
 		this.db.object('playlists/' + i).remove();
 	}
 
-	updatePlaylist(playlist): void {
-		const path = 'playlists/' + playlist.$key;
-		this.db.object(path).update(playlist)
+	public updatePlaylist(playlist): void {
+		const path = 'users/' + this.userToken + '/playlists';
+		this.db.database.ref(path).child(playlist.$key).update(playlist)
 		.catch(error => console.log(error));
 	}
 

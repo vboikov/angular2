@@ -13,8 +13,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
 
-	private storage = firebase.storage();
-	private starsRefAudio: Reference;
+	private URL = 'https://drive.google.com/uc?export=download&id=';
 	public playStatus = false;
 	public audio: HTMLAudioElement;
 
@@ -49,14 +48,18 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 
 	public takeUrl() {
 		const track = this.audio;
-		this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
-		this.starsRefAudio.getDownloadURL().then(data => {
-			track.src = data;
-			// TODO service for play state
-			track.play();
-		}, err => {
-			console.log(err);
-		});
+		// this.starsRefAudio = this.storage.ref('uploads/' + this.selectedSong.url);
+		// this.starsRefAudio.getDownloadURL().then(data => {
+		// 	track.src = data;
+		// 	// TODO service for play state
+		// 	track.play();
+		// }, err => {
+		// 	console.log(err);
+		// });
+		const fileURL = this.URL  + this.selectedSong.url;
+		track.src = fileURL;
+		// track.play();
+		console.log(track.src);
 	}
 
 	public changeSong(state: boolean) {
@@ -80,7 +83,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 				this.selectedSong = this.songs[step];
 			}
 		}
-		this.playstatusService.isPlayId = this.selectedSong.id;
+		this.playstatusService.isPlayId = this.selectedSong.url;
 		this.takeUrl();
 	}
 }

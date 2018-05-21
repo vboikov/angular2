@@ -11,22 +11,20 @@ import {AuthService} from '../../auth/auth.service';
 
 @Injectable()
 export class SongService {
-	private amount = 0;
 	private items: FirebaseListObservable<Song[]>;
 	public songs: any;
+	public userToken: string;
 	constructor(private db: AngularFireDatabase, private authService: AuthService) {
+		this.userToken = this.authService.auth2UserToken();
 	}
 
-	getSongs() {
-		const userToken = this.authService.auth2UserToken();
-		this.items = <FirebaseListObservable<Song[]>>this.db.list('users/' + userToken + 'songs/').map(data => {
+	public getSongs() {
+		return this.items = <FirebaseListObservable<Song[]>>this.db.list('users/' + this.userToken + '/songs').map((data) => {
 			return data;
 		});
-		return this.items;
 	}
 
-	addSong(song: Song, fileId): void {
-		const userToken = this.authService.auth2UserToken();
+	public addSong(song: Song, fileId): void {
 		const itemSong = {
 			singer: song.singer,
 			title: song.title,
@@ -34,14 +32,10 @@ export class SongService {
 			infoSong: song.infoSong,
 			url: fileId
 		};
-		this.songs = this.getSongs().subscribe((data) => {
-			if (data.length) {
-				this.db.database.ref('users/' + userToken).child('songs').push(itemSong);
-			}
-		});
+		this.db.database.ref('users/' + this.userToken).child('songs').child(fileId).set(itemSong);
 	}
 
-	deleteSong(i): void {
+	public deleteSong(i): void {
 		this.db.object('songs/' + i).remove();
 	}
 }

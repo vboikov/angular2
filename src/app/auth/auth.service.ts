@@ -43,7 +43,7 @@ export class AuthService {
 		});
 	}
 
-	public auth2UserToken() {
+	public auth2UserToken(): string {
 		return localStorage.getItem('accessToken');
 	}
 
@@ -69,11 +69,15 @@ export class AuthService {
 		this.sub = this.getUsers().subscribe((data) => {
 			this.existUser = data.find(item => item.info.token === TOKEN);
 			if (!this.existUser) {
-				this.db.database.ref('users/' + TOKEN).set({
+				const startObj = {
 					info: {
-						token: TOKEN
-					}
-				});
+						token: TOKEN,
+						name: ''
+					},
+					songs: [],
+					playlists: []
+				};
+				this.db.database.ref('users/' + TOKEN).set(startObj);
 			}
 		});
 		localStorage.setItem(this.LOCAL_STORAGE_KEY, TOKEN);

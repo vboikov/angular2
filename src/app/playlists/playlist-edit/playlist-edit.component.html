@@ -7,10 +7,10 @@
         </div>
         <div class="field" *ngFor="let song of songs let i=index">
             <div class="checkbox">
-                <input type="checkbox" (change)="onAddToPlaylist($event, song)" [checked]="isChecked(song.id)">
+                <input type="checkbox" (change)="onAddToPlaylist($event, song)" [checked]="isChecked(song)">
             </div>
             <app-playlist-item [data]="song" (click)="onSongClick(song)"
-                               [ngClass]="{'play' : playSongId === song.id}"></app-playlist-item>
+                               [ngClass]="{'play' : playSongUrl === song.id}"></app-playlist-item>
         </div>
         <div class="form-buttons">
             <button *ngIf="editFlag" type="submit">Update playlist</button>

@@ -91,6 +91,7 @@ export class UploadService {
 					uploadRequest.onload = function () {
 						if (uploadRequest.status === 200) {
 							const resp = JSON.parse(uploadRequest.response);
+							console.log(resp);
 							resolve(resp.id);
 						} else {
 							reject(new Error('Error'));
@@ -102,7 +103,7 @@ export class UploadService {
 		}
 
 		return initPromise()
-		.then((data) => initUpload(data));
+		.then((data) => initUpload(data)).then((dta) => {console.log(dta)});
 	}
 
 

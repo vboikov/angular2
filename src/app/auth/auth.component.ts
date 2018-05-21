@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
 import {GoogleApiModule, GoogleApiService} from 'ng-gapi';
-import {Subscription} from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-auth',
@@ -10,8 +9,6 @@ import {Subscription} from 'rxjs/Subscription';
 	styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-
-	public checkUser: Subscription;
 
 	constructor(public authService: AuthService,
 	            public router: Router,
@@ -34,12 +31,6 @@ export class AuthComponent implements OnInit {
 				this.authService.signIn();
 				this.authService.signInSuccessHandler(user);
 			}
-		});
-	}
-
-	public check() {
-		this.checkUser = this.authService.getUsers().subscribe((data) => {
-			console.log(data);
 		});
 	}
 }

@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {PlaystatusService} from '../shared/services/playstatus.service';
 import {Observable} from 'rxjs/Observable';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
 	selector: 'app-playlists',
@@ -26,18 +27,21 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 	public playlists: Playlist[];
 	public choosePlaylist: Playlist;
 	public selectedSongs: Song[];
-	public playSongId: number;
-	public playSong$: Observable<number>;
+	public playSongId: string;
+	public playSong$: Observable<string>;
+	private userToken: string;
 	constructor(private db: AngularFireDatabase,
 	            private songService: SongService,
 	            private playlistService: PlaylistService,
+	            private authService: AuthService,
 	            private playstatusService: PlaystatusService,
 	            private router: Router) {
 
 	};
 
 	ngOnInit() {
-		this.db.database.ref('playlists').on('value',
+		this.userToken = this.authService.auth2UserToken();
+		this.db.database.ref('users/' + this.userToken + '/playlists').on('value',
 			(data) => {
 				if (data.val() === null) {
 					this.router.navigate(['musicshelf/playlist-add/']);
@@ -52,7 +56,7 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 				this.songs = this.choosePlaylist.songs;
 			}
 		});
-		this.playstatusService.isPlayId$.subscribe((newId: number) => {
+		this.playstatusService.isPlayId$.subscribe((newId: string) => {
 			this.playSongId = newId;
 		});
 	}
@@ -67,7 +71,7 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 	onSongClick(songs: Song[], i: number): void {
 		this.selectedSongs = songs;
 		this.selectedSong = this.selectedSongs[i];
-		this.playstatusService.isPlayId = this.selectedSongs[i].id;
+		this.playstatusService.isPlayId = this.selectedSongs[i].url;
 	}
 
 	edit(id: number) {

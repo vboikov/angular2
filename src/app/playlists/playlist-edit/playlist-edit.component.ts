@@ -27,7 +27,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	public playlist: Playlist;
 	public songs: Song[];
 	public selectedSong: Song;
-	public playSongId: number;
+	public playSongUrl: string;
 	public editFlag: boolean;
 	public playlists: Playlist[];
 
@@ -36,7 +36,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	            private playstatusService: PlaystatusService,
 	            private router: Router,
 	            private route: ActivatedRoute) {
-		route.data.subscribe(data => this.playlist = data['playlist']);
+		route.data.subscribe((data) => this.playlist = data['playlist']);
 	};
 
 	ngOnInit() {
@@ -44,51 +44,56 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 		this.sub = this.songService.getSongs().subscribe(songs => {
 			this.songs = songs;
 		});
-		this.playstatusService.isPlayId$.subscribe((newId: number) => {
-			this.playSongId = newId;
+		this.playstatusService.isPlayId$.subscribe((newId: string) => {
+			this.playSongUrl = newId;
 		});
 	}
 
-	isChecked(id): boolean {
-		return !!_.find(this.playlist.songs, (song) => {
-			return song.id === id;
+	public isChecked(song): boolean {
+		return !!_.find(this.playlist.songs, (item) => {
+			return item.url === song.url;
 		});
 	}
 
-	onSongClick(song: Song): void {
+	public onSongClick(song: Song): void {
 		this.selectedSong = song;
-		this.playstatusService.isPlayId = song.id;
+		this.playstatusService.isPlayId = song.url;
 	}
 
-	onAddToPlaylist(e, song: Song) {
+	public onAddToPlaylist(e, song: Song) {
 		if (e.target.checked) {
 			this.playlist.songs.push(song);
+			console.log(this.playlist);
 		} else {
 			this.playlist.songs = _.reject(this.playlist.songs, (songSplice) => {
-				return songSplice.id === song.id;
+				return songSplice.url === song.url;
 			});
 		}
 	}
 
-	onSubmit(playlist) {
+	public onSubmit(playlist) {
 		if (playlist.title && this.playlist.songs.length) {
-			this.playlistService.updatePlaylist(playlist);
+			if (this.editFlag) {
+				this.playlistService.updatePlaylist(playlist);
+			} else {
+				this.playlistService.updatePlaylist(playlist);
+			}
 			this.router.navigate(['musicshelf/playlists']);
 		} else {
 			alert('Please fill all fields');
 		}
 	}
 
-	addPlaylist(title) {
+	public addPlaylist(title) {
 		if (title && this.playlist.songs.length) {
-			this.playlistService.addPlaylist(title, this.playlist.songs);
+			this.playlistService.addPlaylist(this.playlist);
 			this.router.navigate(['musicshelf/playlists']);
 		} else {
 			alert('Please fill all fields');
 		}
 	}
 
-	checkEditFlag() {
+	public checkEditFlag() {
 		if (this.route.snapshot.url[0].path === 'playlist-add') {
 			this.editFlag = false;
 		} else {
