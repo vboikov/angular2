@@ -63,7 +63,6 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	public onAddToPlaylist(e, song: Song) {
 		if (e.target.checked) {
 			this.playlist.songs.push(song);
-			console.log(this.playlist);
 		} else {
 			this.playlist.songs = _.reject(this.playlist.songs, (songSplice) => {
 				return songSplice.url === song.url;

@@ -10,7 +10,7 @@
                 <input type="checkbox" (change)="onAddToPlaylist($event, song)" [checked]="isChecked(song)">
             </div>
             <app-playlist-item [data]="song" (click)="onSongClick(song)"
-                               [ngClass]="{'play' : playSongUrl === song.id}"></app-playlist-item>
+                               [ngClass]="{'play' : playSongUrl === song.url}"></app-playlist-item>
         </div>
         <div class="form-buttons">
             <button *ngIf="editFlag" type="submit">Update playlist</button>
@@ -19,3 +19,4 @@
     </form>
     <app-player-shelf [selectedSong]="selectedSong" [songs]="songs" *ngIf="selectedSong"></app-player-shelf>
 </section>
+<app-spinner></app-spinner>

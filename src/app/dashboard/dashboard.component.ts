@@ -8,10 +8,9 @@ import {Component} from '@angular/core';
 export class DashboardComponent {
 	public menuState: boolean;
 
-	constructor() {
-	}
+	constructor() {}
 
-	receiveMessage($event) {
+	public receiveMessage($event) {
 		this.menuState = $event;
 	}
 

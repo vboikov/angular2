@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {Song} from '../../interfaces/song';
 import {PlaystatusService} from '../../shared/services/playstatus.service';
+import {SpinnerService} from '../../shared/spinner/spinner.service';
 
 @Component({
 	selector: 'app-player-shelf',
@@ -15,12 +16,13 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	public playStatus = false;
 	public audio: HTMLAudioElement;
 
-	constructor(private playstatusService: PlaystatusService) {
+	constructor(private playstatusService: PlaystatusService, private spinnerService: SpinnerService) {
 		this.audio = new Audio();
 	}
 
 	ngOnInit() {
 		this.audio.addEventListener('ended', this.changeSong.bind(this, true), true);
+		this.audio.addEventListener('playing', this.spinnerInit.bind(this), true);
 	}
 
 	ngOnChanges() {
@@ -33,6 +35,9 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 		this.playPause(false);
 	}
 
+	public spinnerInit() {
+		this.spinnerService.hide();
+	}
 
 	public playPause(state: boolean) {
 		if (!state) {
@@ -47,6 +52,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	public takeUrl() {
 		const track = this.audio;
 		track.src = this.URL  + this.selectedSong.url + '&type=.mp3';
+		this.spinnerService.show();
 		track.play();
 	}
 

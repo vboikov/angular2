@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
-import {AddSongComponent} from './addSong/add-song.component'
+import {AddSongComponent} from './addSong/add-song.component';
 import {PlaylistsComponent} from './playlists/playlists.component';
 import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
 import {AuthComponent} from './auth/auth.component';
@@ -15,6 +15,7 @@ import {UnauthorizedGuard} from './shared/guards/unautorized.guard';
 import {UploadComponent} from './layout/upload/upload.component';
 import {PlaylistItemComponent} from './playlists/playlist-item/playlist-item.component';
 import {PlaylistEditComponent} from './playlists/playlist-edit/playlist-edit.component';
+import {SpinnerComponent} from './shared/spinner/spinner.component';
 
 export const routes: Routes = [
 	{
@@ -77,6 +78,7 @@ export const routedComponents = [
 	NavComponent,
 	PlayerComponent,
 	UploadComponent,
+	SpinnerComponent,
 	PlaylistItemComponent,
 	PlaylistEditComponent
 ];

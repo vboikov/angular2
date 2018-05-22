@@ -41,7 +41,7 @@
 
 .trigger button {
     outline: none;
-    border: none;
+    border: 1px solid #000;;
     background: #6e4b8f;
     float: right;
     -webkit-border-radius: 50%;

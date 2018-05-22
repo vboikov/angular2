@@ -5,14 +5,13 @@ nav {
     text-align: center;
     height: 92vh;
     background: #7f59a2;
-    line-height: 40px;
 }
 
 nav li {
     display: block;
     float: left;
     width: 100%;
-    line-height: 40px;
+    /*line-height: 40px;*/
     position: relative;
 }
 
@@ -37,7 +36,7 @@ nav ul li a {
     text-decoration: none;
     width: 100%;
     display: inline-block;
-    line-height: 40px;
+    line-height: 52px;
     font-size: 14px;
 }
 

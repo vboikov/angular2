@@ -6,6 +6,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
 import {GoogleApiModule, GoogleApiService, GoogleAuthService} from 'ng-gapi';
 import {AuthService} from '../../auth/auth.service';
+import {SpinnerService} from '../spinner/spinner.service';
 
 
 @Injectable()
@@ -27,6 +28,7 @@ export class UploadService {
 	constructor(private gapi: GoogleApiModule,
 	            private gapiService: GoogleApiService,
 	            private googleAuth: GoogleAuthService,
+	            private spinnerService: SpinnerService,
 	            private authService: AuthService) {
 		this.gapiService.onLoad().subscribe(() => {
 			this.loadGapiClient();
@@ -85,7 +87,11 @@ export class UploadService {
 					uploadRequest.setRequestHeader('Content-Type', contentType);
 					uploadRequest.setRequestHeader('X-Upload-Content-Type', contentType);
 					uploadRequest.upload.addEventListener('progress', (event) => {
+						self.spinnerService.show();
 						self.uploadPercent = (event.loaded / event.total * 100 | 0);
+						if (self.uploadPercent === 100) {
+							self.spinnerService.hide();
+						}
 						console.log(self.uploadPercent);
 					});
 					uploadRequest.onload = function () {

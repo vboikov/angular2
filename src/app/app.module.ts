@@ -8,7 +8,7 @@ import {AppRoutingModule, routedComponents} from './router.module';
 
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
-import {Angular2FontawesomeModule} from 'angular2-fontawesome/angular2-fontawesome'
+import {Angular2FontawesomeModule} from 'angular2-fontawesome/angular2-fontawesome';
 
 import {AppComponent} from './app.component';
 import {SongService} from './shared/services/song.service';
@@ -23,13 +23,8 @@ import {PlaylistService} from './shared/services/playlist.service';
 import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
 import {SearchDirective} from './shared/directives/search.directive';
 import {PlaystatusService} from './shared/services/playstatus.service';
-import {
-	GoogleApiModule,
-	GoogleApiService,
-	GoogleAuthService,
-	NgGapiClientConfig,
-	NG_GAPI_CONFIG,
-	GoogleApiConfig} from 'ng-gapi';
+import {GoogleApiModule,NgGapiClientConfig,NG_GAPI_CONFIG} from 'ng-gapi';
+import {SpinnerService} from './shared/spinner/spinner.service';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg',
@@ -74,6 +69,7 @@ const gapiClientConfig: NgGapiClientConfig = {
 	providers: [
 		SongService,
 		PlaylistService,
+		SpinnerService,
 		AuthService,
 		AuthorizedGuard,
 		UnauthorizedGuard,

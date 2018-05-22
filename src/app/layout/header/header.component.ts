@@ -10,11 +10,10 @@ export class HeaderComponent {
 	public menuState = false;
 	@Output() messageEvent = new EventEmitter<boolean>();
 
-	constructor(public router: Router) {
-	}
+	constructor(public router: Router) {}
 
 	toogleMenu() {
 		this.menuState = !this.menuState;
-		this.messageEvent.emit(!this.menuState);
+		this.messageEvent.emit(this.menuState);
 	}
 }
