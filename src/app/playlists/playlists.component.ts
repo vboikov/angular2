@@ -63,18 +63,18 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 
 
 	// Visual changes for playlist
-	onListChange(event) {
+	public onListChange(event): void {
 		this.songs = event.songs;
 	}
 
 	// Recieve songs for player component
-	onSongClick(songs: Song[], i: number): void {
+	public onSongClick(songs: Song[], i: number): void {
 		this.selectedSongs = songs;
 		this.selectedSong = this.selectedSongs[i];
 		this.playstatusService.isPlayId = this.selectedSongs[i].url;
 	}
 
-	edit(id: number) {
+	public edit(id: number): void {
 		this.router.navigate(['musicshelf/playlists-edit/' + id]);
 	}
 

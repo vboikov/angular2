@@ -3,6 +3,11 @@ section{
     width: 100%;
     display: block;
     float: left;
+    max-height: 94vh;
+}
+section.openPlayer{
+    max-height: 87vh;
+    overflow-y: scroll;
 }
 
 @media (max-width: 600px) {

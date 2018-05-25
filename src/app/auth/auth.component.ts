@@ -25,7 +25,7 @@ export class AuthComponent implements OnInit {
 	/**
 	 * Login & logout
 	 * **/
-	public loginGoogleDrive() {
+	public loginGoogleDrive(): void {
 		gapi.auth2.getAuthInstance().signIn().then((user) => {
 			if (user) {
 				this.authService.signIn();

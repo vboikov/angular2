@@ -39,7 +39,8 @@ fa {
 }
 
 .song-controls {
-    width: 50%;
+    max-width: 50%;
+    width: auto;
     float: left;
 }
 

@@ -10,7 +10,7 @@ export class DashboardComponent {
 
 	constructor() {}
 
-	public receiveMessage($event) {
+	public receiveMessage($event): void {
 		this.menuState = $event;
 	}
 

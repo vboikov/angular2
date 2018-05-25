@@ -60,7 +60,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 		this.playstatusService.isPlayId = song.url;
 	}
 
-	public onAddToPlaylist(e, song: Song) {
+	public onAddToPlaylist(e, song: Song): void {
 		if (e.target.checked) {
 			this.playlist.songs.push(song);
 		} else {
@@ -70,20 +70,16 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	public onSubmit(playlist) {
+	public updatePlaylist(playlist): void {
 		if (playlist.title && this.playlist.songs.length) {
-			if (this.editFlag) {
-				this.playlistService.updatePlaylist(playlist);
-			} else {
-				this.playlistService.updatePlaylist(playlist);
-			}
+			this.playlistService.updatePlaylist(playlist);
 			this.router.navigate(['musicshelf/playlists']);
 		} else {
 			alert('Please fill all fields');
 		}
 	}
 
-	public addPlaylist(title) {
+	public addPlaylist(title): void {
 		if (title && this.playlist.songs.length) {
 			this.playlistService.addPlaylist(this.playlist);
 			this.router.navigate(['musicshelf/playlists']);
@@ -92,7 +88,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	public checkEditFlag() {
+	public checkEditFlag(): void {
 		if (this.route.snapshot.url[0].path === 'playlist-add') {
 			this.editFlag = false;
 		} else {

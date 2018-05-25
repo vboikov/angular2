@@ -11,10 +11,12 @@ import {SpinnerService} from '../../shared/spinner/spinner.service';
 export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	@Input() selectedSong: Song;
 	@Input() songs: Song[];
+	@Input() time: number;
 
 	private URL = 'https://docs.google.com/uc?authuser=0&id=';
 	public playStatus = false;
 	public audio: HTMLAudioElement;
+	public seekWidth: number;
 
 	constructor(private playstatusService: PlaystatusService, private spinnerService: SpinnerService) {
 		this.audio = new Audio();
@@ -23,6 +25,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 	ngOnInit() {
 		this.audio.addEventListener('ended', this.changeSong.bind(this, true), true);
 		this.audio.addEventListener('playing', this.spinnerInit.bind(this), true);
+		this.audio.addEventListener('timeupdate', this.updateSeek.bind(this), true);
 	}
 
 	ngOnChanges() {
@@ -35,7 +38,11 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 		this.playPause(false);
 	}
 
-	public spinnerInit() {
+	public updateSeek(): void {
+		this.seekWidth = (window.innerWidth / this.audio.duration) * this.audio.currentTime;
+	}
+
+	public spinnerInit(): void {
 		this.spinnerService.hide();
 	}
 
@@ -49,14 +56,14 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 
 	}
 
-	public takeUrl() {
+	public takeUrl(): void {
 		const track = this.audio;
-		track.src = this.URL  + this.selectedSong.url + '&type=.mp3';
+		track.src = this.URL + this.selectedSong.url + '&type=.mp3';
 		this.spinnerService.show();
 		track.play();
 	}
 
-	public changeSong(state: boolean) {
+	public changeSong(state: boolean): void {
 		let step;
 		const amount = this.songs.length - 1;
 		const indexOfSong = this.songs.indexOf(this.selectedSong);

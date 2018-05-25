@@ -37,7 +37,7 @@ export class AuthService {
 	}
 
 
-	public getUsers() {
+	public getUsers(): FirebaseListObservable<User[]> {
 		return this.appUsers$ = <FirebaseListObservable<User[]>>this.db.list('users').map(data => {
 			return data;
 		});
@@ -57,11 +57,13 @@ export class AuthService {
 
 	public signIn(): void {
 		this.googleAuth.getAuth().subscribe((auth) => {
-			auth.signIn().then(res => this.signInSuccessHandler(res));
+			auth.signIn().then(res => {
+				this.signInSuccessHandler(res);
+			});
 		});
 	}
 
-	public signInSuccessHandler(res: GoogleUser) {
+	public signInSuccessHandler(res: GoogleUser): void {
 		const TOKEN = res.getAuthResponse().login_hint;
 		/***
 		 * Save user to base
@@ -85,7 +87,7 @@ export class AuthService {
 		this.router.navigate(['/musicshelf/playlists']);
 	}
 
-	public logOut() {
+	public logOut(): void {
 		localStorage.removeItem(this.LOCAL_STORAGE_KEY);
 		localStorage.removeItem('folderId');
 		gapi.auth2.getAuthInstance().signOut();
@@ -95,18 +97,18 @@ export class AuthService {
 	/***
 	 * Load GAPI
 	 ***/
-	public loadGapiClient() {
+	public loadGapiClient(): void {
 		gapi.load('client:auth2', () => {
 			gapi.client.init({
 				apiKey: this.apiKey,
 				discoveryDocs: this.discoveryDocs,
 				clientId: '851470382067-u1ptf792b66agnv7h1a76mp8hskc9ggt.apps.googleusercontent.com',
 				scope: this.gScope.join(' ')
-			}).then(() => {});
+			});
 		});
 	}
 
-	private updateSigninStatus(isSignedIn) {
+	private updateSigninStatus(isSignedIn): void {
 		if (isSignedIn) {
 			this.checkFolder();
 		} else {
@@ -115,9 +117,9 @@ export class AuthService {
 	}
 
 	/***
-	* Google drive list files
-	***/
-	private checkFolder() {
+	 * Google drive list files
+	 ***/
+	private checkFolder(): void {
 		gapi.client.load('drive', 'v3', () => {
 			gapi.client.drive.files.list({
 				q: 'mimeType=\'application/vnd.google-apps.folder\'',

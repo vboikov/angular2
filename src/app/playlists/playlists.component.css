@@ -43,8 +43,8 @@
     }
 
     app-playlist-item {
-        height: 75vh;
         margin: 0;
-        padding: 20px;
+        width: 100%;
+        float: left;
     }
 }

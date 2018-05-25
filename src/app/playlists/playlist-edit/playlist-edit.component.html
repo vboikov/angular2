@@ -1,5 +1,5 @@
-<section *ngIf="playlist">
-    <form #editPlaylistForm="ngForm" (ngSubmit)="onSubmit(playlist)">
+<section *ngIf="playlist" [ngClass]="{'openPlayer' : selectedSong}">
+    <form #editPlaylistForm="ngForm">
         <div class="field">
             <label for="title">Playlist title</label>
             <input type="text" name="title" id="title" [(ngModel)]="playlist.title" #nameControl
@@ -13,7 +13,7 @@
                                [ngClass]="{'play' : playSongUrl === song.url}"></app-playlist-item>
         </div>
         <div class="form-buttons">
-            <button *ngIf="editFlag" type="submit">Update playlist</button>
+            <button *ngIf="editFlag" (click)="updatePlaylist(playlist)">Update playlist</button>
             <button *ngIf="!editFlag" (click)="addPlaylist(playlist.title)">Add playlist</button>
         </div>
     </form>

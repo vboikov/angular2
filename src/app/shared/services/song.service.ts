@@ -18,7 +18,7 @@ export class SongService {
 		this.userToken = this.authService.auth2UserToken();
 	}
 
-	public getSongs() {
+	public getSongs(): FirebaseListObservable<Song[]> {
 		return this.items = <FirebaseListObservable<Song[]>>this.db.list('users/' + this.userToken + '/songs').map((data) => {
 			return data;
 		});
@@ -33,9 +33,5 @@ export class SongService {
 			url: fileId
 		};
 		this.db.database.ref('users/' + this.userToken).child('songs').child(fileId).set(itemSong);
-	}
-
-	public deleteSong(i): void {
-		this.db.object('songs/' + i).remove();
 	}
 }

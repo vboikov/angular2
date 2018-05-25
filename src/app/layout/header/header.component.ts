@@ -12,7 +12,7 @@ export class HeaderComponent {
 
 	constructor(public router: Router) {}
 
-	toogleMenu() {
+	public toogleMenu(): void {
 		this.menuState = !this.menuState;
 		this.messageEvent.emit(this.menuState);
 	}

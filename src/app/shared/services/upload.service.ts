@@ -35,14 +35,13 @@ export class UploadService {
 		});
 	}
 
-	public loadGapiClient() {
+	public loadGapiClient(): void {
 		gapi.load('client:auth2', () => {
 			gapi.client.init({
 				apiKey: this.apiKey,
 				discoveryDocs: this.discoveryDocs,
 				clientId: this.userKey,
 				scope: this.gScope.join(' ')
-			}).then(() => {
 			});
 		});
 	}
@@ -92,7 +91,6 @@ export class UploadService {
 						if (self.uploadPercent === 100) {
 							self.spinnerService.hide();
 						}
-						console.log(self.uploadPercent);
 					});
 					uploadRequest.onload = function () {
 						if (uploadRequest.status === 200) {
@@ -106,7 +104,6 @@ export class UploadService {
 				};
 			});
 		}
-
 		return initPromise()
 		.then((data) => initUpload(data));
 	}

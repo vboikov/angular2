@@ -36,7 +36,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	onSubmit(obj) {
+	public onSubmit(obj): void {
 		if (obj.title && obj.singer && obj.album && obj.infoSong) {
 			this.uplService.upload(this.selectedFile).then((res) => {
 				this.fileId = res;
@@ -47,7 +47,7 @@ export class AddSongComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	detectFiles(event) {
+	public detectFiles(event): void {
 		if (event.target.files[0].type === 'audio/mp3') {
 			this.selectedFile = event.target.files[0];
 		} else {

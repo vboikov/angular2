@@ -12,7 +12,7 @@ export class UploadComponent {
 	constructor(public router: Router) {
 	}
 
-	public detectFiles(event) {
+	public detectFiles(event): void {
 		this.selectedFiles = event.target.files;
 	}
 }
