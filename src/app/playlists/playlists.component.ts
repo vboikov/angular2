@@ -19,7 +19,6 @@ import {AuthService} from '../auth/auth.service';
 
 
 export class PlaylistsComponent implements OnInit, OnDestroy {
-	@Input() data: Song;
 	@ViewChild(PlayerComponent) footer;
 	private sub: Subscription;
 	public songs: Song[];

@@ -16,7 +16,6 @@ import {Subscription} from 'rxjs/Subscription';
 
 
 export class AddSongComponent implements OnInit, OnDestroy {
-	@Input() data: Song[];
 	@ViewChild('addSongForm') formControlDir: NgForm;
 
 	private sub: Subscription;
@@ -40,7 +39,9 @@ export class AddSongComponent implements OnInit, OnDestroy {
 		if (obj.title && obj.singer && obj.album && obj.infoSong) {
 			this.uplService.upload(this.selectedFile).then((res) => {
 				this.fileId = res;
-				this.songService.addSong(obj, res);
+				this.songService.addSong(obj, res).then(() => {
+					this.router.navigate(['musicshelf/playlists']);
+				});
 			});
 		} else {
 			alert('Please fill all fields');

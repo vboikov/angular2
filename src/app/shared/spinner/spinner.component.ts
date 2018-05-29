@@ -14,7 +14,6 @@ export class SpinnerComponent implements OnInit {
 		this.state = false;
 	}
 
-
 	ngOnInit() {
 		this.spinnerService.state$.subscribe((stateSer: number) => {
 			Promise.resolve(null).then(() => {

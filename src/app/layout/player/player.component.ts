@@ -46,7 +46,7 @@ export class PlayerComponent implements OnChanges, OnDestroy, OnInit {
 		this.spinnerService.hide();
 	}
 
-	public playPause(state: boolean) {
+	public playPause(state: boolean): void {
 		if (!state) {
 			this.audio.pause();
 		} else {

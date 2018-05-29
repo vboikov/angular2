@@ -24,14 +24,16 @@ export class SongService {
 		});
 	}
 
-	public addSong(song: Song, fileId): void {
-		const itemSong = {
-			singer: song.singer,
-			title: song.title,
-			album: song.album,
-			infoSong: song.infoSong,
-			url: fileId
-		};
-		this.db.database.ref('users/' + this.userToken).child('songs').child(fileId).set(itemSong);
+	public addSong(song: Song, fileId): Promise<void> {
+		return new Promise<void>((resolve, reject) => {
+			const itemSong = {
+				singer: song.singer,
+				title: song.title,
+				album: song.album,
+				infoSong: song.infoSong,
+				url: fileId
+			};
+			return resolve(this.db.database.ref('users/' + this.userToken).child('songs').child(fileId).set(itemSong));
+		});
 	}
 }

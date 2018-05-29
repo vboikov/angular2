@@ -28,7 +28,7 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	public songs: Song[];
 	public selectedSong: Song;
 	public playSongUrl: string;
-	public editFlag: boolean;
+	public editFlag = false;
 	public playlists: Playlist[];
 
 	constructor(private songService: SongService,
@@ -89,13 +89,10 @@ export class PlaylistEditComponent implements OnInit, OnDestroy {
 	}
 
 	public checkEditFlag(): void {
-		if (this.route.snapshot.url[0].path === 'playlist-add') {
-			this.editFlag = false;
-		} else {
+		if (this.route.snapshot.url[0].path !== 'playlist-add') {
 			this.editFlag = true;
 		}
 	}
-
 
 	ngOnDestroy() {
 		this.sub.unsubscribe();

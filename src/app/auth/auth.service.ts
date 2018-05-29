@@ -84,7 +84,6 @@ export class AuthService {
 		});
 		localStorage.setItem(this.LOCAL_STORAGE_KEY, TOKEN);
 		this.updateSigninStatus(res);
-		this.router.navigate(['/musicshelf/playlists']);
 	}
 
 	public logOut(): void {
@@ -111,6 +110,7 @@ export class AuthService {
 	private updateSigninStatus(isSignedIn): void {
 		if (isSignedIn) {
 			this.checkFolder();
+			this.router.navigate(['/musicshelf/playlists']);
 		} else {
 			alert('Please auth!');
 		}
