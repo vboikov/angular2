@@ -33,7 +33,8 @@ export class SongService {
 				infoSong: song.infoSong,
 				url: fileId
 			};
-			return resolve(this.db.database.ref('users/' + this.userToken).child('songs').child(fileId).set(itemSong));
+			resolve(this.db.database.ref('users/' + this.userToken).child('songs').child(fileId).set(itemSong));
+			reject(new Error('Error when you add file'));
 		});
 	}
 }

@@ -6,6 +6,7 @@ import GoogleUser = gapi.auth2.GoogleUser;
 import {GoogleApiModule, GoogleApiService, GoogleAuthService} from 'ng-gapi';
 import {User} from '../interfaces/user';
 import {Subscription} from 'rxjs/Subscription';
+import {GapiInitService} from '../shared/services/gapiInit.service';
 
 @Injectable()
 export class AuthService {
@@ -14,26 +15,15 @@ export class AuthService {
 	public appUsers$: any;
 	public existUser: User;
 	public sub: Subscription;
-	private discoveryDocs = [
-		'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
-		'https://www.googleapis.com/discovery/v1/apis/people/v1/rest'
-	];
-	private apiKey = 'AIzaSyAJaVu4nh7bN52UWJ-3grEBx2iMjdjuC9s';
-	private gScope = [
-		'https://www.googleapis.com/auth/drive.metadata',
-		'https://www.googleapis.com/auth/drive.file',
-		'https://www.googleapis.com/auth/drive.appfolder'
-	];
 
 	constructor(private afAuth: AngularFireAuth,
 	            private db: AngularFireDatabase,
 	            private router: Router,
 	            private gapi: GoogleApiModule,
 	            private gapiService: GoogleApiService,
+	            private gapiInitService: GapiInitService,
 	            private googleAuth: GoogleAuthService) {
-		this.gapiService.onLoad().subscribe(() => {
-			this.loadGapiClient();
-		});
+		this.gapiInitService.initGapi();
 	}
 
 
@@ -90,21 +80,6 @@ export class AuthService {
 		localStorage.removeItem(this.LOCAL_STORAGE_KEY);
 		localStorage.removeItem('folderId');
 		gapi.auth2.getAuthInstance().signOut();
-	}
-
-
-	/***
-	 * Load GAPI
-	 ***/
-	public loadGapiClient(): void {
-		gapi.load('client:auth2', () => {
-			gapi.client.init({
-				apiKey: this.apiKey,
-				discoveryDocs: this.discoveryDocs,
-				clientId: '851470382067-u1ptf792b66agnv7h1a76mp8hskc9ggt.apps.googleusercontent.com',
-				scope: this.gScope.join(' ')
-			});
-		});
 	}
 
 	private updateSigninStatus(isSignedIn): void {

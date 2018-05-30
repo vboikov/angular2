@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
-import {GoogleApiModule, GoogleApiService} from 'ng-gapi';
+import {GoogleApiModule} from 'ng-gapi';
+import {GapiInitService} from '../shared/services/gapiInit.service';
 
 @Component({
 	selector: 'app-auth',
@@ -13,13 +14,11 @@ export class AuthComponent implements OnInit {
 	constructor(public authService: AuthService,
 	            public router: Router,
 	            private gapi: GoogleApiModule,
-	            private gapiService: GoogleApiService) {
+	            private gapiInitService: GapiInitService) {
 	}
 
 	ngOnInit() {
-		this.gapiService.onLoad().subscribe(() => {
-			this.authService.loadGapiClient();
-		});
+		this.gapiInitService.initGapi();
 	}
 
 	/**

@@ -23,8 +23,9 @@ import {PlaylistService} from './shared/services/playlist.service';
 import {PlaylistResolver} from './shared/resolvers/playlist.resolver';
 import {SearchDirective} from './shared/directives/search.directive';
 import {PlaystatusService} from './shared/services/playstatus.service';
-import {GoogleApiModule,NgGapiClientConfig,NG_GAPI_CONFIG} from 'ng-gapi';
+import {GoogleApiModule, NgGapiClientConfig, NG_GAPI_CONFIG} from 'ng-gapi';
 import {SpinnerService} from './shared/spinner/spinner.service';
+import {GapiInitService} from './shared/services/gapiInit.service';
 
 export const firebaseConfig = {
 	apiKey: 'AIzaSyDS3RNx9aIYvPdC6HTN8CV3ssHq7sqnmpg',
@@ -75,6 +76,7 @@ const gapiClientConfig: NgGapiClientConfig = {
 		UnauthorizedGuard,
 		UploadService,
 		PlaystatusService,
+		GapiInitService,
 		PlaylistResolver
 	],
 	bootstrap: [AppComponent]

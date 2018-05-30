@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {Song} from '../interfaces/song';
 import {SongService} from '../shared/services/song.service';
 import {PlayerComponent} from '../layout/player/player.component';
@@ -10,13 +10,13 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {PlaystatusService} from '../shared/services/playstatus.service';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../auth/auth.service';
+import {GapiInitService} from '../shared/services/gapiInit.service';
 
 @Component({
 	selector: 'app-playlists',
 	templateUrl: './playlists.component.html',
 	styleUrls: ['./playlists.component.css']
 })
-
 
 export class PlaylistsComponent implements OnInit, OnDestroy {
 	@ViewChild(PlayerComponent) footer;
@@ -27,13 +27,13 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 	public choosePlaylist: Playlist;
 	public selectedSongs: Song[];
 	public playSongId: string;
-	public playSong$: Observable<string>;
 	private userToken: string;
 	constructor(private db: AngularFireDatabase,
 	            private songService: SongService,
 	            private playlistService: PlaylistService,
 	            private authService: AuthService,
 	            private playstatusService: PlaystatusService,
+	            private gapiService: GapiInitService,
 	            private router: Router) {
 
 	};

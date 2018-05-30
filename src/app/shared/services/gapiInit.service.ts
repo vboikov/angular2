@@ -4,13 +4,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
-import {GoogleApiModule, GoogleApiService, GoogleAuthService} from 'ng-gapi';
-import {AuthService} from '../../auth/auth.service';
-import {SpinnerService} from '../spinner/spinner.service';
+import {GoogleApiModule, GoogleApiService} from 'ng-gapi';
 
 
 @Injectable()
-export class GapiService {
+export class GapiInitService {
 	private discoveryDocs = [
 		'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
 		'https://www.googleapis.com/discovery/v1/apis/people/v1/rest'
@@ -25,10 +23,7 @@ export class GapiService {
 	];
 
 	constructor(private gapi: GoogleApiModule,
-	            private gapiService: GoogleApiService,
-	            private googleAuth: GoogleAuthService,
-	            private spinnerService: SpinnerService,
-	            private authService: AuthService) {
+	            private gapiService: GoogleApiService) {
 		this.gapiService.onLoad().subscribe(() => {
 			this.loadGapiClient();
 		});
@@ -43,5 +38,9 @@ export class GapiService {
 				scope: this.gScope.join(' ')
 			});
 		});
+	}
+
+	public initGapi(): boolean {
+		return true;
 	}
 }
